@@ -1,0 +1,8 @@
+{
+  "extends": "@launchmint/config/tsconfig/react",
+  "compilerOptions": {
+    "noEmit": true,
+    "jsx": "react-jsx"
+  },
+  "include": ["src/**/*"]
+}

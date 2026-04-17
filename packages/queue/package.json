@@ -1,0 +1,21 @@
+{
+  "name": "@launchmint/queue",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint src",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "bullmq": "^5.21.2",
+    "ioredis": "^5.4.1"
+  },
+  "devDependencies": {
+    "@launchmint/config": "workspace:*",
+    "typescript": "^5.6.3"
+  }
+}

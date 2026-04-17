@@ -1,0 +1,22 @@
+{
+  "name": "@launchmint/ai",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./prompts": "./src/prompts/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint src",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "@launchmint/db": "workspace:*"
+  },
+  "devDependencies": {
+    "@launchmint/config": "workspace:*",
+    "typescript": "^5.6.3"
+  }
+}

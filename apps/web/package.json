@@ -1,0 +1,44 @@
+{
+  "name": "@launchmint/web",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev -p 3000",
+    "build": "next build",
+    "start": "next start -p 3000",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@launchmint/ai": "workspace:*",
+    "@launchmint/analytics": "workspace:*",
+    "@launchmint/auth": "workspace:*",
+    "@launchmint/billing": "workspace:*",
+    "@launchmint/config": "workspace:*",
+    "@launchmint/db": "workspace:*",
+    "@launchmint/email": "workspace:*",
+    "@launchmint/queue": "workspace:*",
+    "@launchmint/search": "workspace:*",
+    "@launchmint/seo-data": "workspace:*",
+    "@launchmint/seo-meta": "workspace:*",
+    "@launchmint/storage": "workspace:*",
+    "@launchmint/ui": "workspace:*",
+    "lucide-react": "^0.460.0",
+    "next": "14.2.18",
+    "next-auth": "5.0.0-beta.20",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^9.15.0",
+    "eslint-config-next": "14.2.18",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.15",
+    "typescript": "^5.6.3"
+  }
+}

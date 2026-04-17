@@ -1,0 +1,11 @@
+{
+  "extends": "@launchmint/config/tsconfig/node",
+  "compilerOptions": {
+    "outDir": "dist",
+    "noEmit": false,
+    "rootDir": "src",
+    "declaration": false,
+    "sourceMap": true
+  },
+  "include": ["src/**/*"]
+}

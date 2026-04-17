@@ -1,0 +1,66 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": [".env", ".env.local"],
+  "globalEnv": [
+    "NODE_ENV",
+    "DATABASE_URL",
+    "REDIS_URL",
+    "NEXT_PUBLIC_APP_URL",
+    "NEXTAUTH_URL",
+    "NEXTAUTH_SECRET",
+    "GOOGLE_CLIENT_ID",
+    "GOOGLE_CLIENT_SECRET",
+    "GEMINI_API_KEY",
+    "GEMINI_MODEL_PRO",
+    "GEMINI_MODEL_FLASH",
+    "RESEND_API_KEY",
+    "RESEND_FROM",
+    "AWS_REGION",
+    "AWS_ACCESS_KEY_ID",
+    "AWS_SECRET_ACCESS_KEY",
+    "S3_BUCKET",
+    "S3_PUBLIC_URL",
+    "S3_ENDPOINT",
+    "TYPESENSE_HOST",
+    "TYPESENSE_PORT",
+    "TYPESENSE_PROTOCOL",
+    "TYPESENSE_API_KEY",
+    "RAZORPAY_KEY_ID",
+    "RAZORPAY_KEY_SECRET",
+    "RAZORPAY_WEBHOOK_SECRET",
+    "STRIPE_CLIENT_ID",
+    "STRIPE_CLIENT_SECRET",
+    "DATAFORSEO_LOGIN",
+    "DATAFORSEO_PASSWORD",
+    "POSTHOG_KEY",
+    "POSTHOG_HOST",
+    "SENTRY_DSN",
+    "INDEXNOW_KEY",
+    "CRON_SECRET",
+    "ENCRYPTION_KEY"
+  ],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": [".next/**", "!.next/cache/**", "dist/**"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "lint": {
+      "outputs": []
+    },
+    "typecheck": {
+      "dependsOn": ["^build"],
+      "outputs": []
+    },
+    "test": {
+      "dependsOn": ["^build"],
+      "outputs": ["coverage/**"]
+    },
+    "clean": {
+      "cache": false
+    }
+  }
+}

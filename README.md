@@ -129,7 +129,7 @@ launchmint/
 
 ```bash
 # 1. Clone and install
-git clone https://github.com/your-org/launchmint.git
+git clone https://github.com/Sachinchaurasiya360/LanuchMint
 cd launchmint
 pnpm install
 

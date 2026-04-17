@@ -1,0 +1,9 @@
+{
+  "extends": "@launchmint/config/tsconfig/node",
+  "compilerOptions": {
+    "noEmit": true,
+    "outDir": "dist",
+    "rootDir": "."
+  },
+  "include": ["src/**/*", "prisma/**/*.ts"]
+}

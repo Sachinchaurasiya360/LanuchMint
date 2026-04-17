@@ -1,0 +1,17 @@
+{
+  "name": "@launchmint/seo-meta",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint src",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@launchmint/config": "workspace:*",
+    "typescript": "^5.6.3"
+  }
+}

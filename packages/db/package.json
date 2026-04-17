@@ -1,0 +1,39 @@
+{
+  "name": "@launchmint/db",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./client": "./src/client.ts",
+    "./scoped": "./src/scoped.ts",
+    "./types": "./src/types.ts"
+  },
+  "scripts": {
+    "generate": "prisma generate",
+    "migrate": "prisma migrate deploy",
+    "migrate:dev": "prisma migrate dev",
+    "studio": "prisma studio",
+    "seed": "tsx prisma/seed.ts",
+    "seed:directories": "tsx prisma/seeds/directories-seed.ts",
+    "reset": "prisma migrate reset --force",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
+  },
+  "prisma": {
+    "schema": "prisma/schema.prisma",
+    "seed": "tsx prisma/seed.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.18.0"
+  },
+  "devDependencies": {
+    "@launchmint/config": "workspace:*",
+    "@types/node": "^20.14.10",
+    "prisma": "^5.18.0",
+    "tsx": "^4.16.2",
+    "typescript": "^5.5.3"
+  }
+}

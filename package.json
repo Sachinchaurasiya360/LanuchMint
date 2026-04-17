@@ -1,0 +1,41 @@
+{
+  "name": "launchmint",
+  "version": "0.1.0",
+  "private": true,
+  "description": "LaunchMint — Turn visibility into velocity.",
+  "packageManager": "pnpm@9.15.9",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "format": "prettier --write \"**/*.{ts,tsx,md,json}\" --ignore-path .gitignore",
+    "format:check": "prettier --check \"**/*.{ts,tsx,md,json}\" --ignore-path .gitignore",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "db:generate": "pnpm --filter @launchmint/db generate",
+    "db:migrate": "pnpm --filter @launchmint/db migrate",
+    "db:migrate:dev": "pnpm --filter @launchmint/db migrate:dev",
+    "db:studio": "pnpm --filter @launchmint/db studio",
+    "db:seed": "pnpm --filter @launchmint/db seed",
+    "db:reset": "pnpm --filter @launchmint/db reset",
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down",
+    "docker:logs": "docker compose logs -f"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.10",
+    "prettier": "^3.3.3",
+    "turbo": "^2.0.9",
+    "typescript": "^5.5.3"
+  },
+  "pnpm": {
+    "peerDependencyRules": {
+      "ignoreMissing": ["react", "react-dom"]
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "@launchmint/analytics",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./events": "./src/events.ts"
+  },
+  "scripts": {
+    "lint": "eslint src",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "posthog-node": "^4.2.1"
+  },
+  "devDependencies": {
+    "@launchmint/config": "workspace:*",
+    "typescript": "^5.6.3"
+  }
+}

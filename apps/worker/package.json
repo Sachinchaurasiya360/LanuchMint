@@ -1,0 +1,27 @@
+{
+  "name": "@launchmint/worker",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "start": "node --enable-source-maps dist/index.js",
+    "build": "tsc -p tsconfig.build.json",
+    "lint": "eslint src",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@launchmint/ai": "workspace:*",
+    "@launchmint/db": "workspace:*",
+    "@launchmint/email": "workspace:*",
+    "@launchmint/queue": "workspace:*",
+    "@launchmint/search": "workspace:*",
+    "@launchmint/seo-data": "workspace:*"
+  },
+  "devDependencies": {
+    "@launchmint/config": "workspace:*",
+    "@types/node": "^22.9.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3"
+  }
+}
