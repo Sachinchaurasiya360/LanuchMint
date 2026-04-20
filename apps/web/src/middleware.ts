@@ -3,12 +3,17 @@ import { auth } from "./auth.js";
 const PUBLIC_PATHS = new Set([
   "/",
   "/signin",
+  "/signup",
   "/pricing",
   "/changelog",
   "/about",
   "/contact",
+  "/terms",
+  "/privacy",
   "/today",
   "/directories",
+  "/categories",
+  "/founders",
   "/sitemap.xml",
   "/robots.txt",
 ]);
@@ -27,6 +32,10 @@ const PUBLIC_PREFIXES = [
   "/launches/",
   "/review/",
   "/directories/",
+  "/categories/",
+  "/best/",
+  "/compare/",
+  "/sitemap",
 ];
 
 export default auth((req) => {

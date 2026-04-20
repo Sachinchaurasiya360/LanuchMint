@@ -1,4 +1,4 @@
-# LaunchMint — Product Requirements Document
+# LaunchMint - Product Requirements Document
 
 **Version:** 1.0
 **Status:** Draft for Engineering Kickoff
@@ -45,9 +45,9 @@
 
 ## 1. Executive Summary
 
-LaunchMint is a SEO-first, web-based platform that consolidates the workflows founders run across 8+ disconnected tools — Product Hunt (launches), Peerlist (founder identity), Trustpilot/G2 (reviews), RankInPublic (directory submissions), Ahrefs (SEO/backlinks), Indie Hackers (founder journey + MRR) — into a single dashboard with an AI assistant powered by Google Gemini.
+LaunchMint is a SEO-first, web-based platform that consolidates the workflows founders run across 8+ disconnected tools - Product Hunt (launches), Peerlist (founder identity), Trustpilot/G2 (reviews), RankInPublic (directory submissions), Ahrefs (SEO/backlinks), Indie Hackers (founder journey + MRR) - into a single dashboard with an AI assistant powered by Google Gemini.
 
-**Core value proposition:** A solo SaaS founder can launch a product, collect verified reviews, submit to 200+ startup directories, track SEO/backlinks, showcase verified MRR, and build a public founder identity — all from one place, with Gemini automating the repetitive work (descriptions, meta tags, social posts, cold emails, review replies).
+**Core value proposition:** A solo SaaS founder can launch a product, collect verified reviews, submit to 200+ startup directories, track SEO/backlinks, showcase verified MRR, and build a public founder identity - all from one place, with Gemini automating the repetitive work (descriptions, meta tags, social posts, cold emails, review replies).
 
 **Why now:**
 - Product Hunt has degraded into a vote-trading game with poor SEO value.
@@ -121,7 +121,7 @@ We win when:
 | BetaList / MicroLaunch | Pre-launch waitlists | Single-feature |
 | SaaSHub | Comparison pages | Read-only, founders can't claim |
 
-**Unique angle:** No competitor combines launch + reviews + SEO + directory + MRR + founder identity + AI. The integration itself is the moat — each module produces data (reviews, backlinks, MRR) that feeds the others.
+**Unique angle:** No competitor combines launch + reviews + SEO + directory + MRR + founder identity + AI. The integration itself is the moat - each module produces data (reviews, backlinks, MRR) that feeds the others.
 
 ### Why bootstrap-friendly
 
@@ -134,7 +134,7 @@ We win when:
 
 ## 5. User Personas
 
-### P1 — Priya, the Solo SaaS Founder *(Day-One ICP)*
+### P1 - Priya, the Solo SaaS Founder *(Day-One ICP)*
 
 - 28, technical, building a B2B SaaS solo from Bangalore, working nights/weekends.
 - $0–$2k MRR. Wants more eyeballs, signups, backlinks.
@@ -143,40 +143,40 @@ We win when:
 - **Pain:** No time for SEO. Doesn't know what's working. Can't afford Ahrefs.
 - **Win for her:** "I launched, got 47 directories submitted in 2 hours, my product page ranks for `[my-niche] tool` in 60 days, I have a public founder profile that recruiters and angels actually visit."
 
-### P2 — Marco, the Indie Hacker / Bootstrapper
+### P2 - Marco, the Indie Hacker / Bootstrapper
 
 - 35, multi-product portfolio (3 micro-SaaS), $8k MRR.
 - Active on Indie Hackers, X, has a personal blog.
 - **Pain:** Maintaining 3 separate "stacks" for 3 products. Wants one dashboard.
 - **Win:** Multi-product workspace. Public MRR widget pulled from Stripe. Cross-promotes between his own products.
 
-### P3 — Lena, the Marketing Manager at a 12-person SaaS
+### P3 - Lena, the Marketing Manager at a 12-person SaaS
 
 - Manages launches, SEO, reviews for the whole product.
 - Reports to founder/CEO weekly with a deck.
 - **Pain:** Stitching reports from Ahrefs + Trustpilot + ProductHunt into a deck.
 - **Win:** One PDF export. Team dashboard. Role-based access for the dev team.
 
-### P4 — Raj, the Agency Owner (5–10 client SaaS startups)
+### P4 - Raj, the Agency Owner (5–10 client SaaS startups)
 
 - Runs growth-as-a-service for 6 SaaS clients.
 - Bills $2k–$5k/mo per client.
 - **Pain:** Buying 6 Ahrefs seats, 6 Trustpilot subscriptions; each client's data siloed.
 - **Win:** Agency plan with white-label dashboards, client switcher, exportable reports for each client.
 
-### P5 — Anika, the Angel Investor
+### P5 - Anika, the Angel Investor
 
 - Reviews 30 startups/month. Looks for traction signals.
 - **Pain:** No standardized place to compare two early-stage startups.
 - **Win:** Investor view. Filter by MRR / reviews / launch traction. Save shortlist.
 
-### P6 — Devon, the Developer Submitting a Side Project
+### P6 - Devon, the Developer Submitting a Side Project
 
 - Ships an open-source tool, wants visibility.
 - **Pain:** Doesn't want to fill out 50 forms.
-- **Win:** AI-assisted directory submission — fills the 50 forms automatically.
+- **Win:** AI-assisted directory submission - fills the 50 forms automatically.
 
-### P7 — Sara, the Buyer Researching a Tool
+### P7 - Sara, the Buyer Researching a Tool
 
 - Searches "best email marketing tool for SaaS" on Google.
 - Lands on a LaunchMint comparison page.
@@ -256,7 +256,7 @@ Format: **As [persona], I want [outcome] so that [value].**
 
 ## 8. User Flows
 
-### Flow 1 — First-time founder onboarding (target: <5 min to first launch draft)
+### Flow 1 - First-time founder onboarding (target: <5 min to first launch draft)
 
 ```
 Land on / (landing page)
@@ -275,7 +275,7 @@ Land on / (landing page)
   → Dashboard home with product card + next-action checklist
 ```
 
-### Flow 2 — Launch day flow
+### Flow 2 - Launch day flow
 
 ```
 Founder schedules launch for Date D
@@ -290,7 +290,7 @@ Founder schedules launch for Date D
   → On D+7: AI-generated launch retrospective email + share-link to embed badge
 ```
 
-### Flow 3 — Review collection flow
+### Flow 3 - Review collection flow
 
 ```
 Founder → Dashboard → Reviews → "Invite reviewers"
@@ -306,18 +306,18 @@ Founder → Dashboard → Reviews → "Invite reviewers"
   → Review feeds into product trust score, founder profile, comparison pages
 ```
 
-### Flow 4 — SEO tracking flow
+### Flow 4 - SEO tracking flow
 
 ```
 Founder adds domain to SEO Tracker
   → BullMQ schedules: daily DR check, weekly backlink crawl, weekly keyword rank check
-  → Data sourced from DataForSEO API (Phase 1) — see [SEO.md](./SEO.md)
+  → Data sourced from DataForSEO API (Phase 1) - see [SEO.md](./SEO.md)
   → Dashboard shows: DR, organic traffic, top keywords, backlinks gained/lost, spam score
   → Weekly Resend digest: "+12 backlinks this week, 3 new ranking keywords"
   → Founder clicks "Compare with competitor" → adds competitor domain → side-by-side
 ```
 
-### Flow 5 — Directory submission flow
+### Flow 5 - Directory submission flow
 
 ```
 Founder → Dashboard → Directory Submission
@@ -332,7 +332,7 @@ Founder → Dashboard → Directory Submission
   → Backlink monitor watches for live links → marks "live" automatically
 ```
 
-### Flow 6 — Agency client flow
+### Flow 6 - Agency client flow
 
 ```
 Agency owner (P4) → Workspace switcher → "+ Add client"
@@ -353,7 +353,7 @@ Using **MoSCoW + WSJF** (Weighted Shortest Job First). Each feature scored:
 - **Job Size (JS):** 1–10 (smaller = faster)
 - **WSJF = (UV + TC + RR) / JS**
 
-**MUST (MVP — Weeks 1–8)**
+**MUST (MVP - Weeks 1–8)**
 
 | Feature | UV | TC | RR | JS | WSJF |
 |---------|----|----|----|----|------|
@@ -376,7 +376,7 @@ Using **MoSCoW + WSJF** (Weighted Shortest Job First). Each feature scored:
 | Global search (Typesense) | 8 | 7 | 5 | 4 | 5.0 |
 | Programmatic SEO pages (product / founder / category) | 9 | 9 | 7 | 5 | 5.0 |
 
-**SHOULD (V1 — Weeks 9–16)**
+**SHOULD (V1 - Weeks 9–16)**
 
 | Feature | Why V1 not MVP |
 |---------|----------------|
@@ -394,7 +394,7 @@ Using **MoSCoW + WSJF** (Weighted Shortest Job First). Each feature scored:
 | DR badge embedding | Backlink farm for us |
 | Notifications & alerts (in-app + email) | MVP has email only |
 
-**COULD (V2 — Months 5–9)**
+**COULD (V2 - Months 5–9)**
 
 - Private communities, founder DMs, events/AMAs, job board, marketplace, public API, browser extension, AI landing page generation, multi-language, investor discovery, founder matchmaking, public roadmap pages, changelog pages, embeddable widgets v2, mobile app.
 
@@ -434,7 +434,7 @@ Using **MoSCoW + WSJF** (Weighted Shortest Job First). Each feature scored:
 - Single PostgreSQL DB with row-level workspace scoping
 
 **Shared Foundation (built FIRST per DRY mandate)**
-- `@launchmint/ui` shared component library (buttons, forms, cards, tables, modals — Shadcn-based)
+- `@launchmint/ui` shared component library (buttons, forms, cards, tables, modals - Shadcn-based)
 - `@launchmint/db` Prisma client wrapper with workspace scoping helpers
 - `@launchmint/auth` shared auth middleware
 - `@launchmint/ai` Gemini wrapper with prompt templates, retry, cost tracking
@@ -513,7 +513,7 @@ Using **MoSCoW + WSJF** (Weighted Shortest Job First). Each feature scored:
 - Manual badge issuance
 - Audit log
 
-**Email (Resend) — every event**
+**Email (Resend) - every event**
 - Welcome
 - Launch reminder (D-3, D-1)
 - Launch live
@@ -625,17 +625,17 @@ After MVP ships and we have 100+ paying founders, V1 adds:
 
 **2. Worker (separate Node.js process)**
 - Consumes BullMQ queues:
-  - `seo-crawl` — daily DR + backlinks (DataForSEO calls)
-  - `keyword-rank` — weekly ranking checks
-  - `mrr-sync` — daily Stripe MRR pull
-  - `directory-submit` — auto-submit jobs
-  - `directory-verify` — backlink-live verification
-  - `ai-generation` — Gemini calls (queued for cost batching)
-  - `email-send` — Resend dispatches
-  - `fake-review-scan` — Gemini classifier
-  - `webhook-process` — Stripe / Razorpay webhooks
-  - `scrape-meta` — onboarding URL scraping
-  - `populate-directory-db` — admin-triggered scrape jobs
+  - `seo-crawl` - daily DR + backlinks (DataForSEO calls)
+  - `keyword-rank` - weekly ranking checks
+  - `mrr-sync` - daily Stripe MRR pull
+  - `directory-submit` - auto-submit jobs
+  - `directory-verify` - backlink-live verification
+  - `ai-generation` - Gemini calls (queued for cost batching)
+  - `email-send` - Resend dispatches
+  - `fake-review-scan` - Gemini classifier
+  - `webhook-process` - Stripe / Razorpay webhooks
+  - `scrape-meta` - onboarding URL scraping
+  - `populate-directory-db` - admin-triggered scrape jobs
 
 **3. Database (single PostgreSQL 16 on RDS)**
 - Multi-tenant via `workspace_id` column.
@@ -777,7 +777,7 @@ Full schema in [DATABASE.md](./DATABASE.md). Summary of core entities:
 - Slugs (`product.slug`, `founder.slug`) are immutable after first publish to preserve SEO.
 - Soft deletes via `deleted_at` on user-facing entities.
 - `metadata JSONB` column on `Product`, `FounderProfile` for forward-compat.
-- All AI generations stored in `AiGeneration` with prompt, response, token count, model, cost — used for billing and quality review.
+- All AI generations stored in `AiGeneration` with prompt, response, token count, model, cost - used for billing and quality review.
 
 ---
 
@@ -890,7 +890,7 @@ Every API handler invokes `authorize(user, workspace, resource, action)` before 
 | **Investor** | Global (read-only enhanced) | Filter founders by MRR, save shortlist, contact (V2 DMs) |
 | **Public** | None | View public pages only |
 
-### Permission matrix (excerpt — MVP)
+### Permission matrix (excerpt - MVP)
 
 | Action | Owner | Founder | TeamMember | Agency | Client | Mod | Public |
 |--------|:-----:|:-------:|:----------:|:------:|:------:|:---:|:------:|
@@ -959,7 +959,7 @@ LaunchMint **is** an SEO product, so its own SEO must be exemplary.
 
 ### Three-layer SEO plan
 
-**Layer 1 — Foundation (every page)**
+**Layer 1 - Foundation (every page)**
 - Server-rendered HTML.
 - Semantic markup (h1/h2/h3, article, section).
 - JSON-LD per page type:
@@ -974,24 +974,24 @@ LaunchMint **is** an SEO product, so its own SEO must be exemplary.
 - robots.txt + IndexNow ping for fresh URLs.
 - Core Web Vitals: LCP < 2.0s, INP < 200ms, CLS < 0.1.
 
-**Layer 2 — Programmatic SEO (millions of pages potential)**
-- `/products/[slug]` — every product launched.
-- `/founders/[slug]` — every founder.
-- `/categories/[slug]` — e.g., `/categories/email-marketing`.
-- `/industries/[slug]` — e.g., `/industries/healthtech`.
-- `/directories/[slug]` — every directory in the DB.
-- `/best/[category]` — best email marketing tools, refreshed weekly.
-- `/compare/[a]-vs-[b]` — auto-generated when both products exist.
-- `/alternatives/[product]` — e.g., `/alternatives/mailchimp`.
-- `/[country]/startups` — e.g., `/india/startups`.
-- `/[city]/startups` — e.g., `/bangalore/startups`.
+**Layer 2 - Programmatic SEO (millions of pages potential)**
+- `/products/[slug]` - every product launched.
+- `/founders/[slug]` - every founder.
+- `/categories/[slug]` - e.g., `/categories/email-marketing`.
+- `/industries/[slug]` - e.g., `/industries/healthtech`.
+- `/directories/[slug]` - every directory in the DB.
+- `/best/[category]` - best email marketing tools, refreshed weekly.
+- `/compare/[a]-vs-[b]` - auto-generated when both products exist.
+- `/alternatives/[product]` - e.g., `/alternatives/mailchimp`.
+- `/[country]/startups` - e.g., `/india/startups`.
+- `/[city]/startups` - e.g., `/bangalore/startups`.
 
 **Quality gates (anti-thin-content):**
 - Minimum 350 words of unique content per page (AI-generated where appropriate, human-reviewed for top categories).
-- No empty comparison pages — both products must have ≥3 reviews each.
-- No empty city pages — minimum 10 startups in city before page indexes.
+- No empty comparison pages - both products must have ≥3 reviews each.
+- No empty city pages - minimum 10 startups in city before page indexes.
 
-**Layer 3 — Content marketing**
+**Layer 3 - Content marketing**
 - 2–3 founder interviews per week (long-form).
 - Weekly "indie traction report" (data we own).
 - Tool-of-the-week deep dive.
@@ -1057,7 +1057,7 @@ LaunchMint **is** an SEO product, so its own SEO must be exemplary.
 
 **Detailed in [MONETIZATION.md](./MONETIZATION.md).**
 
-### Pricing tiers (revised from original — recommended)
+### Pricing tiers (revised from original - recommended)
 
 > **Note on pricing:** The original brief specified $69/$149/$199. Recommended adjustment: introduce a $29 Starter to capture solo founders who'd otherwise stay on Free, and lift Agency to $299 for a clearer ladder. Final pricing decision is the founder's; spec below assumes the recommended structure.
 
@@ -1085,7 +1085,7 @@ Annual = 2 months free.
 - AI credits: hard cap; buy 1,000 extra for $10.
 - SEO domains: hard cap; upgrade to add more.
 - Directory submissions: hard cap; upgrade to add more.
-- Reviews: unlimited on all plans (incl. free) — virality > revenue here.
+- Reviews: unlimited on all plans (incl. free) - virality > revenue here.
 
 ### Revenue projection (conservative)
 
@@ -1101,7 +1101,7 @@ ARPU target $60–$70 (heavy mix of Starter + Growth).
 ### Why Razorpay (not Stripe billing)
 - India-friendly (zero-friction INR, UPI).
 - Global card support adequate for Phase 1.
-- Stripe used **read-only** to pull MRR for verified MRR widget — not for billing.
+- Stripe used **read-only** to pull MRR for verified MRR widget - not for billing.
 - Switch to Stripe Billing as primary processor reconsidered at Month 12 if US/EU paid mix > 60%.
 
 ---
@@ -1110,21 +1110,21 @@ ARPU target $60–$70 (heavy mix of Starter + Growth).
 
 **Detailed in [MARKETING.md](./MARKETING.md).** Summary:
 
-### Phase 1 — Pre-launch (Weeks -4 to 0)
+### Phase 1 - Pre-launch (Weeks -4 to 0)
 - Founder builds in public on X + LinkedIn (founder has existing audience).
 - Waitlist landing page with copy: "The all-in-one launch, SEO, review, backlink, founder identity, and startup growth platform."
 - Lead-magnet: "Free directory list of 200+ startup directories" → email capture via Resend.
 - Pre-launch design partner program: 20 founders get free Pro for 6 months in exchange for testimonial + case study.
 
-### Phase 2 — Launch (Week 0 — MVP ship)
-- Product Hunt launch (yes — eat our own first, then move).
+### Phase 2 - Launch (Week 0 - MVP ship)
+- Product Hunt launch (yes - eat our own first, then move).
 - Tweetstorm + LinkedIn long-form from founder.
 - Email blast to waitlist.
 - 10 podcast appearances in indie founder space (Indie Hackers, This Week in Startups, etc.) booked via PR push.
 - "Hot take" content: "We rebuilt Product Hunt for SEO."
 
-### Phase 3 — Growth (Months 1–6)
-- Programmatic SEO — primary moat.
+### Phase 3 - Growth (Months 1–6)
+- Programmatic SEO - primary moat.
 - Content engine: 2 founder interviews/week; weekly indie traction report; data-driven posts ("we analyzed 1,000 launches and here's what predicts success").
 - Referral program ($30 cash or 1 free month per paid referral).
 - Affiliate program (30% recurring for 12 months).
@@ -1136,7 +1136,7 @@ ARPU target $60–$70 (heavy mix of Starter + Growth).
 3. **LinkedIn** (B2B founders, weekly long-form)
 4. **Indie Hackers + Reddit** (community participation)
 5. **Podcasts** (PR-driven, monthly)
-6. **YouTube** (tutorial channel — "How to launch your SaaS" — Month 4+)
+6. **YouTube** (tutorial channel - "How to launch your SaaS" - Month 4+)
 7. **Paid** (only after CAC validated; Google Ads on `[competitor] alternative` queries)
 
 ### Marketing pages (must exist at MVP)
@@ -1162,7 +1162,7 @@ ARPU target $60–$70 (heavy mix of Starter + Growth).
 
 ## 24. Community Strategy
 
-Community is **important** (per founder direction) but not at MVP — V2 ships private communities.
+Community is **important** (per founder direction) but not at MVP - V2 ships private communities.
 
 **MVP community surface:**
 - Public comments on launch pages.
@@ -1174,7 +1174,7 @@ Community is **important** (per founder direction) but not at MVP — V2 ships p
 - Founder follow (notify on new launches).
 - Profile activity feed (public).
 
-**V2 — full community:**
+**V2 - full community:**
 - Per-workspace private communities.
 - Founder DMs.
 - AMAs.
@@ -1183,7 +1183,7 @@ Community is **important** (per founder direction) but not at MVP — V2 ships p
 
 **Anti-toxicity rules from day one:**
 - No anonymous comments (Google account required).
-- AI moderation on every comment (Gemini classifier — toxicity, spam, ad).
+- AI moderation on every comment (Gemini classifier - toxicity, spam, ad).
 - Three-strike auto-suspend.
 - Founders can hide (not delete) comments on their pages with public reason.
 
@@ -1199,27 +1199,27 @@ Community is **important** (per founder direction) but not at MVP — V2 ships p
 
 LaunchMint compounds value via **5 self-reinforcing loops**:
 
-### Loop 1 — Programmatic SEO loop
+### Loop 1 - Programmatic SEO loop
 ```
 Founder launches → product page indexed → founder shares → backlinks → DR rises → all our pages rank higher → more organic traffic → more launches
 ```
 
-### Loop 2 — Embeddable badge loop
+### Loop 2 - Embeddable badge loop
 ```
 Founder embeds "Featured on LaunchMint" badge on their site → backlinks to us → founder's customers see badge → click through → become users → embed badges
 ```
 
-### Loop 3 — Review collection loop
+### Loop 3 - Review collection loop
 ```
 Founder invites customers to review → customers create accounts → discover other products → become customers themselves → their founders invite them again
 ```
 
-### Loop 4 — Comparison page loop
+### Loop 4 - Comparison page loop
 ```
 Founder A claims product → comparison pages auto-generated against competitors → comparison pages rank for `[A] vs [B]` queries → competitor B sees their listing → claims their listing → invites their reviewers → loop expands
 ```
 
-### Loop 5 — Referral loop (V1)
+### Loop 5 - Referral loop (V1)
 ```
 Paid founder refers peer founder → both get 1 free month → both invest more → both refer more
 ```
@@ -1237,14 +1237,14 @@ Paid founder refers peer founder → both get 1 free month → both invest more 
 
 ### Launch day (T0)
 - Soft launch to waitlist 24h prior.
-- 06:00 UTC — public launch.
-- 09:00 UTC — Product Hunt launch (LaunchMint launches on Product Hunt for the irony and traffic).
-- 10:00 UTC — Tweetstorm + LinkedIn long-form.
-- 12:00 UTC — Email blast.
-- 14:00–22:00 UTC — Founder lives in comments, replies to every PH comment.
+- 06:00 UTC - public launch.
+- 09:00 UTC - Product Hunt launch (LaunchMint launches on Product Hunt for the irony and traffic).
+- 10:00 UTC - Tweetstorm + LinkedIn long-form.
+- 12:00 UTC - Email blast.
+- 14:00–22:00 UTC - Founder lives in comments, replies to every PH comment.
 - Ride momentum into Hacker News (Show HN) within 48h.
 
-### Launch checklist (founder-facing — used inside the app and at our own launch)
+### Launch checklist (founder-facing - used inside the app and at our own launch)
 - [ ] Product name, tagline, 1-line + 3-paragraph descriptions
 - [ ] Logo (square, 256×256 min)
 - [ ] At least 3 screenshots OR 1 demo video
@@ -1280,7 +1280,7 @@ Paid founder refers peer founder → both get 1 free month → both invest more 
 | Risk | Likelihood | Impact | Mitigation |
 |------|:----------:|:------:|------------|
 | Product Hunt reacts (cuts API, etc.) | Low | Low | We don't depend on PH API; we replace it |
-| Ahrefs / SEMrush price-drops to free | Low | High | We bundle 7 categories, not just SEO — defensible |
+| Ahrefs / SEMrush price-drops to free | Low | High | We bundle 7 categories, not just SEO - defensible |
 | Bootstrapping runway exhausted | Med | Critical | Charge from day one, free tier limits drive conversion |
 | Razorpay India-only friction for US founders | Med | Med | Stripe-as-billing readiness in V1 if US mix > 40% |
 | Lawsuit from a founder over a bad review | Med | Med | Clear ToS, takedown process, "verified customer" requirement |
@@ -1381,7 +1381,7 @@ report_exported                    { format }
 
 **Detail in [ROADMAP.md](./ROADMAP.md). Summary:**
 
-- **Sprint 1 (W1–2):** Foundation — repo, packages (`ui`, `db`, `auth`, `ai`, `email`, `queue`, `storage`), Google OAuth, base layouts, brand system.
+- **Sprint 1 (W1–2):** Foundation - repo, packages (`ui`, `db`, `auth`, `ai`, `email`, `queue`, `storage`), Google OAuth, base layouts, brand system.
 - **Sprint 2 (W3–4):** Founder profiles + Product CRUD + onboarding scrape flow + S3 uploads.
 - **Sprint 3 (W5):** Launches + leaderboard + upvotes + comments.
 - **Sprint 4 (W6):** Reviews + verified badges + AI fake-review classifier + founder reply.
@@ -1398,7 +1398,7 @@ report_exported                    { format }
 |---------|-------|
 | Q1 (M1–3) | MVP build + ship + first 100 paid |
 | Q2 (M4–6) | V1 features (team, agency, badges, alerts) + 1k paid |
-| Q3 (M7–9) | V2 begin — communities, DMs, public API + 3k paid |
+| Q3 (M7–9) | V2 begin - communities, DMs, public API + 3k paid |
 | Q4 (M10–12) | Mobile app, multi-language, investor system + 5k paid |
 
 ---
@@ -1423,16 +1423,16 @@ See [README.md](./README.md) for the full project README. Outline:
 
 ## Appendices
 
-- [README.md](./README.md) — Engineering README
-- [ROADMAP.md](./ROADMAP.md) — 12-week sprint plan + quarterly roadmap
-- [DATABASE.md](./DATABASE.md) — Full Prisma schema
-- [API.md](./API.md) — Full REST API reference
-- [ARCHITECTURE.md](./ARCHITECTURE.md) — System architecture deep-dive
-- [DESIGN.md](./DESIGN.md) — Brand system, UI library, page-by-page design notes
-- [SEO.md](./SEO.md) — Programmatic SEO + content strategy
-- [MONETIZATION.md](./MONETIZATION.md) — Pricing, billing, gating, referrals, affiliate
-- [MARKETING.md](./MARKETING.md) — GTM, channels, page-by-page marketing site
-- [ONBOARDING.md](./ONBOARDING.md) — Onboarding + launch checklist + analytics events
+- [README.md](./README.md) - Engineering README
+- [ROADMAP.md](./ROADMAP.md) - 12-week sprint plan + quarterly roadmap
+- [DATABASE.md](./DATABASE.md) - Full Prisma schema
+- [API.md](./API.md) - Full REST API reference
+- [ARCHITECTURE.md](./ARCHITECTURE.md) - System architecture deep-dive
+- [DESIGN.md](./DESIGN.md) - Brand system, UI library, page-by-page design notes
+- [SEO.md](./SEO.md) - Programmatic SEO + content strategy
+- [MONETIZATION.md](./MONETIZATION.md) - Pricing, billing, gating, referrals, affiliate
+- [MARKETING.md](./MARKETING.md) - GTM, channels, page-by-page marketing site
+- [ONBOARDING.md](./ONBOARDING.md) - Onboarding + launch checklist + analytics events
 
 ---
 

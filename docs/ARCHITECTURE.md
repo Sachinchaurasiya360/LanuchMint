@@ -1,4 +1,4 @@
-# LaunchMint — Technical Architecture
+# LaunchMint - Technical Architecture
 
 This document describes how LaunchMint is built, deployed, and scaled. Audience: engineers and SREs.
 
@@ -57,7 +57,7 @@ This document describes how LaunchMint is built, deployed, and scaled. Audience:
 
 ## Component breakdown
 
-### `apps/web` — Next.js 14
+### `apps/web` - Next.js 14
 
 - **Public site** (`app/(public)/*`): `/`, `/today`, `/products/[slug]`, `/founders/[slug]`, `/categories/[slug]`, `/directories`, `/best/[cat]`, `/compare/[a]-vs-[b]`, marketing pages.
   - Rendering: ISR with `revalidate: 60` for high-change pages, `revalidate: 3600` for evergreen (founder profile, comparison).
@@ -66,14 +66,14 @@ This document describes how LaunchMint is built, deployed, and scaled. Audience:
 - **API routes** (`app/api/v1/*`): Mounted under Next; thin handlers that call into shared service modules in `packages/*`.
 - **Auth middleware**: `middleware.ts` enforces `requireAuth` on `/app/*` and `/api/v1/*` (except `/api/v1/public/*` and `/api/v1/auth/*`).
 
-### `apps/worker` — standalone Node
+### `apps/worker` - standalone Node
 
 - One process, one Docker container.
 - Spawns one BullMQ Worker per queue (concurrency configurable per queue).
 - Reads same `packages/*` modules.
 - Handles cron via `bullmq-pro`-style repeat options or system cron POST-ing internal endpoints.
 
-### `packages/*` — shared
+### `packages/*` - shared
 
 | Package | Responsibility |
 |---------|---------------|
@@ -162,9 +162,9 @@ Cache invalidation:
 ## Multi-tenancy
 
 - **Single DB, single schema, row-level scoping.** Every tenant table has `workspaceId`.
-- `packages/db` exports `dbScoped(workspaceId)` returning a Prisma client proxy that auto-injects `workspaceId` filter on every query — eliminates "forgot to filter" bugs.
+- `packages/db` exports `dbScoped(workspaceId)` returning a Prisma client proxy that auto-injects `workspaceId` filter on every query - eliminates "forgot to filter" bugs.
 - Cross-tenant queries (admin, search index build) use raw `db` and explicit comments.
-- **Why not RLS?** App-level filter is faster, easier to debug, and avoids per-connection role overhead. Trade-off: a single missed filter is a leak — mitigated by the proxy + lint rule that warns on raw `db.<table>` usage in app code.
+- **Why not RLS?** App-level filter is faster, easier to debug, and avoids per-connection role overhead. Trade-off: a single missed filter is a leak - mitigated by the proxy + lint rule that warns on raw `db.<table>` usage in app code.
 
 ---
 
@@ -244,9 +244,9 @@ comparisons (id, slugA, slugB, productAName, productBName)
 - Per-workspace webhooks for: `review.received`, `backlink.gained`, `backlink.lost`, `launch.live`, `subscription.updated`. HMAC-signed.
 
 **Incoming:**
-- `/api/v1/webhooks/razorpay` — subscription events
-- `/api/v1/webhooks/stripe` — for Stripe Connect MRR side
-- `/api/v1/webhooks/resend` — delivery, bounce, open, click
+- `/api/v1/webhooks/razorpay` - subscription events
+- `/api/v1/webhooks/stripe` - for Stripe Connect MRR side
+- `/api/v1/webhooks/resend` - delivery, bounce, open, click
 
 All incoming webhooks:
 1. Verify HMAC.
@@ -275,7 +275,7 @@ All incoming webhooks:
 | Better Stack | Uptime + status page |
 | Postgres slow query log | Queries > 200ms surface to Sentry |
 | BullMQ Dashboard | Queue health (private subnet, basic auth) |
-| Custom metrics endpoint | `/api/v1/internal/metrics` (Prometheus exposition) — V1 |
+| Custom metrics endpoint | `/api/v1/internal/metrics` (Prometheus exposition) - V1 |
 
 **Logs:**
 - Structured JSON via `pino`. `correlationId` carried from HTTP request → enqueued job → child jobs.
@@ -341,7 +341,7 @@ jobs:
 
 | Stage | Users | Bottleneck | Action |
 |-------|------:|-----------|--------|
-| 0–1k MAU | — | None | Single t3.large worker, db.t3.medium |
+| 0–1k MAU | - | None | Single t3.large worker, db.t3.medium |
 | 1k–10k MAU | DB writes (review submits) | Add RDS read replica; route read queries via Prisma read replicas |
 | 10k–50k MAU | Worker queue depth | Add second worker EC2; partition queues |
 | 50k–200k MAU | Edge cache miss rate | Add Vercel ISR scaling; add second region; consider managed K8s |
@@ -361,7 +361,7 @@ jobs:
 - **Secrets:** AWS Secrets Manager, not env files in repo. Local dev uses `.env` (gitignored).
 - **Integration tokens:** OAuth refresh tokens encrypted column-level with AWS KMS data key.
 - **Backups:** RDS daily snapshot 7-day PITR; S3 versioning enabled.
-- **DR:** Documented runbook for region failover (V2 — at MVP, accept ~RTO 4h with snapshot restore).
+- **DR:** Documented runbook for region failover (V2 - at MVP, accept ~RTO 4h with snapshot restore).
 - **Vulnerability scanning:** Dependabot + GitHub CodeQL on PRs.
 - **Pen test:** External pen test booked at $20k MRR threshold.
 - **GDPR:** EU users can request export + delete via `/app/settings/privacy`. Export job dumps user-owned rows + signed URL emailed via Resend.
@@ -384,7 +384,7 @@ jobs:
 
 | Layer | Tool | Coverage |
 |-------|------|----------|
-| Unit | Vitest | All `packages/*` exports — target 80% |
+| Unit | Vitest | All `packages/*` exports - target 80% |
 | Integration | Vitest + Testcontainers | API routes against real Postgres + Redis |
 | E2E | Playwright | Top user flows: signup → product create → publish → review |
 | Visual regression | Playwright + Percy | Public page templates |
@@ -402,4 +402,4 @@ jobs:
 - [API.md](./API.md)
 - Per-package `README.md` inside `packages/*/README.md`
 - Inline JSDoc on every exported function in `packages/*`
-- Runbook directory `docs/runbooks/` (V1+) — incident response, on-call, deploy rollback
+- Runbook directory `docs/runbooks/` (V1+) - incident response, on-call, deploy rollback

@@ -42,9 +42,11 @@ export function UpvoteButton({
       variant={upvoted ? "default" : "outline"}
       onClick={onClick}
       disabled={isPending}
+      aria-label={upvoted ? `Remove your upvote (${count} total)` : `Upvote this product (${count} so far)`}
+      aria-pressed={upvoted}
       className="flex h-12 flex-col items-center justify-center gap-0 px-4"
     >
-      <ChevronUp className="h-4 w-4" />
+      <ChevronUp className="h-4 w-4" aria-hidden="true" />
       <span className="text-sm font-semibold">{count}</span>
     </Button>
   );

@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { db } from "@launchmint/db";
+import { track } from "@launchmint/analytics";
 import { auth } from "@/auth";
 
 const COMMENT_MAX = 2_000;
@@ -34,9 +35,11 @@ export async function toggleUpvoteAction(productId: string): Promise<ToggleUpvot
   if (existing) {
     await db.upvote.delete({ where: { id: existing.id } });
     upvoted = false;
+    track(userId, "upvote_removed", { productId });
   } else {
     await db.upvote.create({ data: { productId, userId } });
     upvoted = true;
+    track(userId, "upvote_cast", { productId });
   }
 
   const count = await db.upvote.count({ where: { productId } });
@@ -84,7 +87,7 @@ export async function postCommentAction(input: PostCommentInput) {
     if (!parent) throw new Error("PARENT_NOT_FOUND");
   }
 
-  await db.comment.create({
+  const comment = await db.comment.create({
     data: {
       productId: product.id,
       authorId: userId,
@@ -92,6 +95,11 @@ export async function postCommentAction(input: PostCommentInput) {
       parentId: input.parentId ?? null,
       status: "PUBLISHED",
     },
+  });
+  track(userId, "comment_posted", {
+    entityType: "product",
+    entityId: comment.id,
+    parentId: input.parentId ?? undefined,
   });
 
   const total = await db.comment.count({

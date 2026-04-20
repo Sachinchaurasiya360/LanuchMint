@@ -8,13 +8,13 @@ The all-in-one launch, SEO, review, backlink, founder identity, and startup grow
 
 ## What is LaunchMint?
 
-LaunchMint is a SEO-first, web-based platform that combines what founders today get from Product Hunt, Peerlist, Trustpilot, RankInPublic, Ahrefs-lite, Indie Hackers, and G2 — into a single dashboard with an AI assistant powered by Google Gemini.
+LaunchMint is a SEO-first, web-based platform that combines what founders today get from Product Hunt, Peerlist, Trustpilot, RankInPublic, Ahrefs-lite, Indie Hackers, and G2 - into a single dashboard with an AI assistant powered by Google Gemini.
 
 A solo SaaS founder can:
 - **Launch a product** with a permanent, SEO-indexed page (not a one-day Product Hunt window).
 - **Collect reviews** with verified-customer badges and AI-detected fake-review filtering.
 - **Submit to 200+ startup directories** in hours instead of weeks, with AI-generated descriptions per directory.
-- **Track SEO** — DR, backlinks, organic traffic, keyword rankings, spam score.
+- **Track SEO** - DR, backlinks, organic traffic, keyword rankings, spam score.
 - **Compare against competitors** side-by-side.
 - **Show verified MRR** pulled directly from Stripe.
 - **Build a founder identity** at `launchmint.com/founder/yourname`.
@@ -83,8 +83,8 @@ Full brand & UI guide: [docs/DESIGN.md](./DESIGN.md).
 ```
 launchmint/
 ├── apps/
-│   ├── web/              # Next.js 14 — public site + dashboard
-│   └── worker/           # Node worker — BullMQ consumers
+│   ├── web/              # Next.js 14 - public site + dashboard
+│   └── worker/           # Node worker - BullMQ consumers
 ├── packages/
 │   ├── ui/               # Shared Shadcn components
 │   ├── db/               # Prisma schema + client
@@ -114,42 +114,85 @@ launchmint/
 
 ### Prereqs
 
-- Node 20+
-- pnpm 9+
-- Docker + Docker Compose
-- A Google Cloud project with OAuth client (web)
-- Gemini API key
-- Resend API key
-- DataForSEO sandbox credentials (or real)
-- Razorpay test keys
-- AWS S3 bucket (or LocalStack for dev)
-- PostHog project (or skip in dev)
+- **Node 20+** - verify with `node -v`
+- **pnpm 9+** - install via `npm install -g pnpm`
+- **Docker Desktop** (Windows/macOS) or Docker Engine + Compose v2 (Linux) - must be **running** before `docker compose` commands
+- **Git**
+- External service credentials (only required for the features you want to exercise locally):
+  - Google Cloud OAuth client (web) - sign-in
+  - Gemini API key - AI generation
+  - Resend API key - transactional email
+  - DataForSEO sandbox credentials - SEO data
+  - Razorpay test keys - billing
+  - AWS S3 bucket (or LocalStack, bundled) - uploads
+  - PostHog project - analytics (optional in dev)
 
 ### Setup
 
 ```bash
 # 1. Clone and install
-git clone https://github.com/Sachinchaurasiya360/LanuchMint
-cd launchmint
+git clone https://github.com/Sachinchaurasiya360/LanuchMint.git
+cd LanuchMint
 pnpm install
 
-# 2. Boot local services (Postgres, Redis, Typesense)
+# 2. Start Docker Desktop (Windows/macOS: launch the app and wait until the whale icon is steady).
+#    Then boot local services (Postgres 5432, Redis 6379, Typesense 8108, LocalStack S3 4566).
 docker compose up -d
+
+# Verify services are healthy
+docker compose ps
 
 # 3. Configure environment
 cp .env.example .env
-# Edit .env with your keys
+# Edit .env with your keys - at minimum DATABASE_URL, REDIS_URL, NEXTAUTH_SECRET, GEMINI_API_KEY.
 
-# 4. Database
+# 4. Database - generate Prisma client, apply migrations, seed dev data
 pnpm db:migrate
 pnpm db:seed
 
-# 5. Run web + worker (in two terminals)
-pnpm --filter web dev
-pnpm --filter worker dev
+# 5. Run the full dev stack (web + worker) from the repo root
+pnpm dev
+# …or run them individually in separate terminals:
+pnpm --filter @launchmint/web dev
+pnpm --filter @launchmint/worker dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
+
+### Default local service URLs
+
+| Service   | URL / Host                      | Credentials (dev) |
+|-----------|---------------------------------|-------------------|
+| Web app   | http://localhost:3000           | -                 |
+| Postgres  | `postgresql://launchmint:launchmint@localhost:5432/launchmint` | user `launchmint` / pass `launchmint` |
+| Redis     | `redis://localhost:6379`        | no auth           |
+| Typesense | http://localhost:8108           | API key `dev-typesense-key` |
+| LocalStack S3 | http://localhost:4566       | dummy AWS creds   |
+
+### Stopping / resetting services
+
+```bash
+docker compose down              # stop containers, keep data
+docker compose down -v           # stop AND wipe Postgres/Redis/Typesense volumes (full reset)
+docker compose logs -f redis     # tail a single service's logs
+```
+
+### Troubleshooting
+
+**`ECONNREFUSED 127.0.0.1:6379` (or `::1:6379`) from the worker**
+Redis isn't running. Start Docker Desktop, then `docker compose up -d redis`. Verify with `docker compose ps` - the `launchmint-redis` container should show `healthy`.
+
+**`failed to connect to the docker API … dockerDesktopLinuxEngine`**
+Docker Desktop isn't running. Launch it from the Start menu (Windows) or Applications (macOS) and wait ~30s for the engine to initialize before retrying `docker compose up -d`.
+
+**Prisma `P1001: Can't reach database server`**
+Postgres container isn't up or port 5432 is taken by a local Postgres install. Check with `docker compose ps`; stop the conflicting local service or change the host port mapping in [docker-compose.yml](./docker-compose.yml).
+
+**Port already in use (3000 / 5432 / 6379 / 8108 / 4566)**
+Another process is bound to the port. Either kill it (`netstat -ano | findstr :<port>` on Windows, `lsof -i :<port>` on macOS/Linux) or remap the port in `docker-compose.yml`.
+
+**Worker boots but jobs never run**
+Confirm `REDIS_URL` in `.env` matches the compose binding (`redis://localhost:6379`) and that both `web` and `worker` read the same `.env`.
 
 ---
 

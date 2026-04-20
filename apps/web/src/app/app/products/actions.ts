@@ -11,7 +11,10 @@ import {
 import { requirePermission } from "@launchmint/auth";
 import { enqueue } from "@launchmint/queue";
 import { scrapeMeta } from "@launchmint/scrape";
+import { abs } from "@launchmint/seo-meta";
+import { track } from "@launchmint/analytics";
 import { requireSession } from "@/lib/session";
+import { submitIndexNow } from "@/lib/indexnow";
 
 export interface CreateProductInput {
   name: string;
@@ -41,6 +44,13 @@ export async function createProductAction(input: CreateProductInput) {
   });
 
   await enqueue("index-product", { productId: product.id }).catch(() => {});
+
+  track(ctx.user.id, "product_created", {
+    workspaceId,
+    productId: product.id,
+    category: product.category,
+    source: "manual",
+  });
 
   revalidatePath("/app/products");
   redirect(`/app/products/${product.id}/edit`);
@@ -96,6 +106,26 @@ export async function updateProductAction(input: UpdateProductInput) {
 
   const updated = await db.product.update({ where: { id: input.id }, data });
   await enqueue("index-product", { productId: updated.id }).catch(() => {});
+
+  // Ping IndexNow when a product flips to LIVE - also refreshes the category
+  // + best-of surfaces that now include this product.
+  if (input.status === "LIVE") {
+    const slug = updated.category
+      .toLowerCase()
+      .replace(/&/g, "and")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+    void submitIndexNow([
+      abs(`/products/${updated.slug}`),
+      abs(`/categories/${slug}`),
+      abs(`/best/${slug}`),
+    ]);
+    track(ctx.user.id, "product_published", {
+      workspaceId,
+      productId: updated.id,
+      launchScore: (updated as { launchScore?: number | null }).launchScore ?? 0,
+    });
+  }
 
   revalidatePath(`/app/products/${updated.id}/edit`);
   revalidatePath(`/products/${updated.slug}`);

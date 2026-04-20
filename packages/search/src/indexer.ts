@@ -44,7 +44,7 @@ export async function searchDocs<T>(args: SearchArgs) {
     page: args.page ?? 1,
     per_page: args.perPage ?? 20,
     facet_by: args.facetBy,
-  }) as Promise<{
+  }) as unknown as Promise<{
     found: number;
     hits: { document: T }[];
     facet_counts?: { field_name: string; counts: { value: string; count: number }[] }[];

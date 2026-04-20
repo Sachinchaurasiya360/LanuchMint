@@ -12,11 +12,14 @@
   },
   "dependencies": {
     "@launchmint/ai": "workspace:*",
+    "@launchmint/analytics": "workspace:*",
+    "@launchmint/billing": "workspace:*",
     "@launchmint/db": "workspace:*",
     "@launchmint/email": "workspace:*",
     "@launchmint/queue": "workspace:*",
     "@launchmint/search": "workspace:*",
-    "@launchmint/seo-data": "workspace:*"
+    "@launchmint/seo-data": "workspace:*",
+    "@sentry/node": "^8.40.0"
   },
   "devDependencies": {
     "@launchmint/config": "workspace:*",

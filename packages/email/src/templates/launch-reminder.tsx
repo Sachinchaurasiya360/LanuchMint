@@ -22,17 +22,17 @@ export function LaunchReminderEmail({
       : `${productName} launches tomorrow`;
 
   return (
-    <EmailLayout preview={`${headline} — finish your checklist.`}>
+    <EmailLayout preview={`${headline} - finish your checklist.`}>
       <Heading style={{ fontSize: 22, margin: "0 0 12px" }}>
         {firstName}, {headline.toLowerCase()}.
       </Heading>
       <Text style={{ fontSize: 14, lineHeight: "22px", color: "#404040" }}>
         Scheduled for {scheduledFor}. Take 10 minutes to walk the launch
-        checklist — assets, copy, social posts, and the cross-post plan.
+        checklist - assets, copy, social posts, and the cross-post plan.
       </Text>
       <Text style={{ fontSize: 14, lineHeight: "22px", color: "#404040" }}>
         {daysOut === 1
-          ? "Tomorrow you'll be in the comments — not editing copy. Lock it down today."
+          ? "Tomorrow you'll be in the comments - not editing copy. Lock it down today."
           : "There's still time to fix anything the readiness scorer flagged."}
       </Text>
       <Button

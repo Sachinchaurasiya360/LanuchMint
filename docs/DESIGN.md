@@ -1,4 +1,4 @@
-# LaunchMint — Design System & UI Spec
+# LaunchMint - Design System & UI Spec
 
 This document defines the brand, design tokens, components, and page-by-page UI for LaunchMint. Audience: designers, frontend engineers.
 
@@ -7,7 +7,7 @@ This document defines the brand, design tokens, components, and page-by-page UI 
 ## Brand mandate
 
 - **Colors:** White (#FFFFFF) and Yellow (#FACC15) only as brand. Neutral grays for structure. **No gradients.**
-- **No emojis** anywhere — UI, marketing copy, transactional emails, error messages, docs.
+- **No emojis** anywhere - UI, marketing copy, transactional emails, error messages, docs.
 - **Standard icons only** via Lucide (`lucide-react`). No custom illustrations at MVP.
 - **Tone:** Confident, founder-to-founder, dry, technical. No marketing fluff. No "🚀" energy in copy.
 - **Logo:** Wordmark `LaunchMint` in Inter Black, with a single yellow square accent.
@@ -59,7 +59,7 @@ export const colors = {
 **Usage rules:**
 - Background: `white` (light) and `zinc-950` (dark).
 - Brand yellow reserved for: primary CTAs, active states, brand badge, key data highlights (DR badge, Verified MRR badge).
-- Yellow is **never** used as a fill for body text, backgrounds, or large surfaces — buttons, badges, accents only.
+- Yellow is **never** used as a fill for body text, backgrounds, or large surfaces - buttons, badges, accents only.
 - Body text: `zinc-900` on white, `zinc-100` on dark.
 - Muted text: `zinc-500`.
 - Borders: `zinc-200` (light), `zinc-800` (dark).
@@ -82,7 +82,7 @@ export const colors = {
 | Caption / label | Inter | 500 (uppercase, tracking-wider) | 12 / 16 |
 | Code / data | JetBrains Mono | 400/500 | 14 / 20 |
 
-**Loading:** `next/font` with subset preload. No FOIT — render system fallback first, swap.
+**Loading:** `next/font` with subset preload. No FOIT - render system fallback first, swap.
 
 ---
 
@@ -94,7 +94,7 @@ Tailwind default (4px base): `0, 0.5, 1, 1.5, 2, 3, 4, 5, 6, 8, 10, 12, 16, 20, 
 
 ## Elevation
 
-Three shadow tokens — flat-by-default aesthetic:
+Three shadow tokens - flat-by-default aesthetic:
 
 ```css
 --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
@@ -202,31 +202,31 @@ Mobile: sidebar collapses to bottom-tab bar (5 primary items: Home, Products, Re
 
 ## Dashboard navigation (final spec)
 
-### Left sidebar — primary
+### Left sidebar - primary
 
-1. **Home** — Onboarding checklist OR KPI overview
-2. **Products** — list + detail
-3. **Launches** — schedule + history
-4. **Reviews** — inbox + invite
-5. **SEO** — overview + keywords + backlinks + competitor (V1)
-6. **Directories** — DB + my submissions
-7. **Founder Profile** — editor + preview
+1. **Home** - Onboarding checklist OR KPI overview
+2. **Products** - list + detail
+3. **Launches** - schedule + history
+4. **Reviews** - inbox + invite
+5. **SEO** - overview + keywords + backlinks + competitor (V1)
+6. **Directories** - DB + my submissions
+7. **Founder Profile** - editor + preview
 
-### Left sidebar — secondary (collapsible group: "Workspace")
+### Left sidebar - secondary (collapsible group: "Workspace")
 
 8. **Team** (V1)
 9. **Agency / Clients** (V1, Agency role only)
 10. **Reports** (V1)
-11. **Integrations** — Stripe, X, LinkedIn
-12. **Billing** — plan, invoices, usage meter
-13. **Settings** — workspace, profile, security
+11. **Integrations** - Stripe, X, LinkedIn
+12. **Billing** - plan, invoices, usage meter
+13. **Settings** - workspace, profile, security
 
 ### Top bar
 
 - Workspace switcher (left)
 - Global search (Cmd+K) (center)
-- Notifications bell (right) — V1
-- Avatar menu (right) — Profile, Switch account, Sign out
+- Notifications bell (right) - V1
+- Avatar menu (right) - Profile, Switch account, Sign out
 
 ---
 
@@ -235,7 +235,7 @@ Mobile: sidebar collapses to bottom-tab bar (5 primary items: Home, Products, Re
 ### Public
 
 **Landing `/`**
-- Hero: H1 "Turn visibility into velocity." Sub: "Launch, review, rank, and grow your startup — all in one platform." Primary CTA: "Launch your product" (yellow). Secondary: "Discover startups" (ghost).
+- Hero: H1 "Turn visibility into velocity." Sub: "Launch, review, rank, and grow your startup - all in one platform." Primary CTA: "Launch your product" (yellow). Secondary: "Discover startups" (ghost).
 - Feature grid (6): Launch / Reviews / SEO / Backlinks / Directories / Founder identity.
 - Social proof: "X,XXX founders, Y,XXX products launched, Z,XXX reviews collected" (live counters).
 - Pricing teaser → /pricing.
@@ -262,7 +262,7 @@ Mobile: sidebar collapses to bottom-tab bar (5 primary items: Home, Products, Re
 
 **Directory page `/directories/[slug]`**
 - Header: directory logo (favicon scrape), name, DR badge, cost.
-- Description (we own — not the directory's marketing copy).
+- Description (we own - not the directory's marketing copy).
 - "Submit your product to [Directory]" CTA (yellow).
 - Recent submissions (founder list + product).
 - Related directories.

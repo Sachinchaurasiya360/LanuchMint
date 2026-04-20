@@ -15,7 +15,7 @@ import { SiteFooter } from "@/components/site-footer";
 export const revalidate = 3600;
 
 export const metadata: Metadata = buildMetadata({
-  title: "Startup directories — curated submission targets",
+  title: "Startup directories - curated submission targets",
   description:
     "Submit your startup to the directories that actually drive traffic and backlinks. Filter by niche, domain rating, and cost.",
   path: "/directories",
@@ -81,7 +81,7 @@ export default async function DirectoriesPage({
     collectionPageJsonLd({
       name: "Startup directories",
       description:
-        "Curated submission targets for startups — niche directories, launch platforms, and backlink-worthy listing sites.",
+        "Curated submission targets for startups - niche directories, launch platforms, and backlink-worthy listing sites.",
       url: "/directories",
       items: directories.map((d) => ({
         name: d.name,
@@ -110,7 +110,7 @@ export default async function DirectoriesPage({
             Directories that actually drive traffic
           </h1>
           <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-            Every entry is hand-curated — cost, domain rating, and review speed
+            Every entry is hand-curated - cost, domain rating, and review speed
             verified by the LaunchMint team. Connect a product to auto-generate
             tailored submission copy.
           </p>

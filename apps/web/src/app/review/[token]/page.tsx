@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ShieldCheck } from "lucide-react";
 import { db } from "@launchmint/db";
-import { verifyReviewInvite } from "@launchmint/auth";
+import { verifyReviewInvite } from "@launchmint/auth/tokens";
 import { Badge } from "@launchmint/ui";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -12,7 +12,7 @@ import { ReviewSubmitForm } from "./review-form";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Write a review — LaunchMint",
+  title: "Write a review - LaunchMint",
   description: "Submit a verified review using your invite link.",
   robots: { index: false, follow: false },
 };

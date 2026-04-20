@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { db, ensureUniqueSlug } from "@launchmint/db";
+import { enqueue } from "@launchmint/queue";
 import { requireSession } from "@/lib/session";
 
 export interface FounderProfileInput {
@@ -43,6 +44,8 @@ export async function upsertFounderProfileAction(input: FounderProfileInput) {
       data: { ...data, slug, workspaceId, userId },
     });
   }
+
+  await enqueue("index-founder", { userId }).catch(() => {});
 
   revalidatePath("/app/profile");
   if (existing?.slug) revalidatePath(`/founders/${existing.slug}`);

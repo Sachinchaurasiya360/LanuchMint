@@ -9,7 +9,9 @@
     ".": "./src/index.ts",
     "./next": "./src/next.ts",
     "./rbac": "./src/rbac.ts",
-    "./session": "./src/session.ts"
+    "./session": "./src/session.ts",
+    "./tokens": "./src/tokens.ts",
+    "./password": "./src/password.ts"
   },
   "scripts": {
     "lint": "eslint .",
@@ -18,10 +20,12 @@
   "dependencies": {
     "@auth/prisma-adapter": "^2.4.1",
     "@launchmint/db": "workspace:*",
+    "bcryptjs": "^2.4.3",
     "next-auth": "5.0.0-beta.20"
   },
   "devDependencies": {
     "@launchmint/config": "workspace:*",
+    "@types/bcryptjs": "^2.4.6",
     "@types/node": "^20.14.10",
     "next": "^14.2.5",
     "react": "^18.3.1",

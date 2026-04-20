@@ -88,7 +88,7 @@ export function ReviewSubmitForm({
           className="mt-1"
         />
         <p className="mt-1 text-xs text-muted-foreground">
-          {body.length} / 5000 — minimum 30 characters.
+          {body.length} / 5000 - minimum 30 characters.
         </p>
       </div>
       {error ? <p className="text-sm text-red-600">{error}</p> : null}

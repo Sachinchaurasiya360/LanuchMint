@@ -1,4 +1,4 @@
-# LaunchMint — Marketing & Go-to-Market
+# LaunchMint - Marketing & Go-to-Market
 
 This document defines positioning, messaging, marketing-site IA, channel strategy, and the launch playbook.
 
@@ -6,13 +6,13 @@ This document defines positioning, messaging, marketing-site IA, channel strateg
 
 ## Positioning
 
-**Category:** Founder operating system (new category — defined here).
+**Category:** Founder operating system (new category - defined here).
 
 **Tagline:** Turn visibility into velocity.
 
 **One-liner:** "The all-in-one launch, SEO, review, backlink, founder identity, and startup growth platform."
 
-**Elevator (30s):** "LaunchMint replaces the eight tools founders juggle for visibility — Product Hunt, Trustpilot, Ahrefs, RankInPublic, Peerlist, Indie Hackers, G2, and the directory submission spreadsheet — with one dashboard. You launch, collect verified reviews, submit to 200+ directories, track SEO and backlinks, show verified MRR, and build a public founder identity. Gemini AI does the busywork. One subscription, $29 to $299 per month."
+**Elevator (30s):** "LaunchMint replaces the eight tools founders juggle for visibility - Product Hunt, Trustpilot, Ahrefs, RankInPublic, Peerlist, Indie Hackers, G2, and the directory submission spreadsheet - with one dashboard. You launch, collect verified reviews, submit to 200+ directories, track SEO and backlinks, show verified MRR, and build a public founder identity. Gemini AI does the busywork. One subscription, $29 to $299 per month."
 
 **Why us, why now:**
 - Product Hunt launches die in 24 hours. We make them permanent SEO assets.
@@ -28,11 +28,11 @@ This document defines positioning, messaging, marketing-site IA, channel strateg
 |--------|----------|-----|
 | **Launch** | "Your launch shouldn't die in 24 hours." | "Permanent, indexable launch pages that compound traffic for years." |
 | **Trust** | "Reviews you can actually trust." | "Verified-customer badges. AI-flagged fakes. Founder replies on every review." |
-| **SEO** | "SEO without the $99/mo bill." | "DR, backlinks, keyword rankings, and competitor compares — built for founders, priced for founders." |
+| **SEO** | "SEO without the $99/mo bill." | "DR, backlinks, keyword rankings, and competitor compares - built for founders, priced for founders." |
 | **Directories** | "200+ directory submissions in 2 hours." | "AI prioritizes the highest-DR directories for your niche and writes the descriptions." |
 | **Identity** | "Your canonical founder profile." | "One URL that ranks for your name. All your products, all your reviews, your verified MRR." |
 | **MRR** | "Show MRR you didn't have to screenshot." | "Connect Stripe, prove your traction publicly with one click." |
-| **AI** | "Gemini does the busywork." | "Descriptions, meta tags, social posts, cold emails, review replies — generated, not written." |
+| **AI** | "Gemini does the busywork." | "Descriptions, meta tags, social posts, cold emails, review replies - generated, not written." |
 
 ---
 
@@ -100,7 +100,7 @@ This document defines positioning, messaging, marketing-site IA, channel strateg
 **Resources**
 - `/blog` and `/blog/[slug]`
 - `/changelog`
-- `/directories` (programmatic — also a feature page)
+- `/directories` (programmatic - also a feature page)
 - `/founders` (founder directory)
 - `/today` (live leaderboard)
 
@@ -108,44 +108,44 @@ This document defines positioning, messaging, marketing-site IA, channel strateg
 
 ## Landing page (`/`) wireframe & copy
 
-### Section 1 — Hero
+### Section 1 - Hero
 - **H1:** Turn visibility into velocity.
-- **Sub:** Launch your product, collect reviews, submit to 200+ directories, track SEO and backlinks, and own your founder identity — all in one dashboard.
+- **Sub:** Launch your product, collect reviews, submit to 200+ directories, track SEO and backlinks, and own your founder identity - all in one dashboard.
 - **Primary CTA (yellow):** Launch your product
 - **Secondary CTA (ghost):** Discover startups
 - **Below CTAs:** "No credit card. Free forever for 1 product."
 - **Visual:** Product screenshot (dashboard home).
 
-### Section 2 — Stat strip (live counters via API)
+### Section 2 - Stat strip (live counters via API)
 - X,XXX founders
 - Y,XXX products launched
 - Z,XXX reviews collected
 - AAA,XXX directory submissions
 
-### Section 3 — Problem framing (3-column)
+### Section 3 - Problem framing (3-column)
 - "Your Product Hunt launch dies in 24 hours."
 - "Ahrefs costs $99/mo just for the basics."
 - "Directory submission still takes 40 hours."
 
-### Section 4 — Feature blocks (alternating left/right, 6 blocks)
-1. **Launch** — screenshot + bullets + "Learn more →"
+### Section 4 - Feature blocks (alternating left/right, 6 blocks)
+1. **Launch** - screenshot + bullets + "Learn more →"
 2. **Reviews**
 3. **SEO**
 4. **Directories**
 5. **Founder identity**
 6. **AI assistant**
 
-### Section 5 — Compare row
+### Section 5 - Compare row
 "Replace 8 tools with one." Logos crossed out → LaunchMint logo.
 
-### Section 6 — Social proof
+### Section 6 - Social proof
 - 3 founder testimonials with avatar, name, product link.
 - Trusted-by logo strip.
 
-### Section 7 — Pricing teaser
+### Section 7 - Pricing teaser
 - 3 cards (Free, Starter, Growth) with "See all plans →".
 
-### Section 8 — FAQ
+### Section 8 - FAQ
 - 8–10 founder-empathetic questions:
   - "Is this a Product Hunt replacement?"
   - "How is this different from Ahrefs?"
@@ -156,7 +156,7 @@ This document defines positioning, messaging, marketing-site IA, channel strateg
   - "Do you support [my country / currency]?"
   - "How does the AI work?"
 
-### Section 9 — Final CTA
+### Section 9 - Final CTA
 - "Launch your product in under 5 minutes."
 - Yellow CTA + "No credit card."
 
@@ -185,7 +185,7 @@ See [SEO.md](./SEO.md) for full strategy. Driver of free-tier signups.
 ### 4. Indie Hackers + Reddit
 - Active commentary in `r/SaaS`, `r/indiehackers`, `r/startups`, `r/Entrepreneur`.
 - Indie Hackers product page + monthly milestone updates.
-- Avoid spam — value-add only.
+- Avoid spam - value-add only.
 
 ### 5. Podcasts
 - Goal: 10 podcast appearances in first 90 days.
@@ -229,7 +229,7 @@ See [SEO.md](./SEO.md) for full strategy. Driver of free-tier signups.
 - Twitter thread + LinkedIn post drafted.
 - Product Hunt scheduled.
 
-### T0 — Launch day
+### T0 - Launch day
 - 06:00 UTC: Site flips public; waitlist email blast.
 - 09:00 UTC: Product Hunt launch live.
 - 10:00 UTC: Twitter mega-thread + LinkedIn long-form.
@@ -299,7 +299,7 @@ See [SEO.md](./SEO.md) for full strategy. Driver of free-tier signups.
 - D90: Renewal/retention check-in (if monthly)
 
 **Newsletter (weekly, opt-out):**
-- "Indie Mint" — every Tuesday: top launches, indie traction stat, one founder interview, one tutorial.
+- "Indie Mint" - every Tuesday: top launches, indie traction stat, one founder interview, one tutorial.
 
 ---
 
@@ -329,8 +329,8 @@ Available at `/press`:
 
 ## Partnerships short-list (Months 1–6)
 
-- **Form builders:** Tally, Typeform alternatives — co-launch with our review widget.
+- **Form builders:** Tally, Typeform alternatives - co-launch with our review widget.
 - **Indie newsletters:** Refind, IndieDojo, MicroConf newsletter.
 - **Founder courses:** MicroConf, Indie Hackers premium.
-- **No-code platforms:** Bubble, Webflow — directory of products built on each.
+- **No-code platforms:** Bubble, Webflow - directory of products built on each.
 - **Stripe partnership program:** for verified MRR widget credibility.

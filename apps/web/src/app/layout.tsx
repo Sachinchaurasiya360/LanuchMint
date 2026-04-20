@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
-import { buildMetadata } from "@launchmint/seo-meta";
+import { buildMetadata, SITE } from "@launchmint/seo-meta";
 import {
   organizationJsonLd,
   renderJsonLd,
@@ -11,12 +11,35 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
-export const metadata: Metadata = buildMetadata({
-  title: "LaunchMint — Turn visibility into velocity.",
+const base = buildMetadata({
+  title: "LaunchMint - Turn visibility into velocity.",
   description:
     "SEO-first launch, review, and growth platform for solo founders. Launch your product, collect verified reviews, and rank in search.",
   path: "/",
 });
+
+export const metadata: Metadata = {
+  ...base,
+  metadataBase: new URL(SITE.url),
+  applicationName: SITE.name,
+  authors: [{ name: SITE.name, url: SITE.url }],
+  creator: SITE.name,
+  publisher: SITE.name,
+  formatDetection: { email: false, address: false, telephone: false },
+  verification: {
+    google: SITE.verification.google,
+    yandex: SITE.verification.yandex,
+    other: SITE.verification.bing
+      ? { "msvalidate.01": [SITE.verification.bing] }
+      : undefined,
+  },
+};
+
+export const viewport = {
+  themeColor: "#FACC15",
+  width: "device-width",
+  initialScale: 1,
+};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -30,7 +53,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="min-h-screen bg-background font-sans antialiased">
-        {children}
+        <div id="page-content">{children}</div>
       </body>
     </html>
   );

@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@google/generative-ai": "^0.21.0",
+    "@launchmint/analytics": "workspace:*",
     "@launchmint/db": "workspace:*"
   },
   "devDependencies": {

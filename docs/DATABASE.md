@@ -1,4 +1,4 @@
-# LaunchMint — Database Schema
+# LaunchMint - Database Schema
 
 **Database:** PostgreSQL 16
 **ORM:** Prisma 5

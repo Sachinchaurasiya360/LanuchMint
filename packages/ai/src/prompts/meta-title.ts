@@ -7,7 +7,7 @@ export interface MetaTitleInput {
   category: string;
 }
 
-const SYSTEM = `You write SEO meta titles. Strict 50-60 character limit. Format: "<Product> — <value prop> | LaunchMint". No emojis, no clickbait, no all-caps.`;
+const SYSTEM = `You write SEO meta titles. Strict 50-60 character limit. Format: "<Product> - <value prop> | LaunchMint". No emojis, no clickbait, no all-caps.`;
 
 export async function generateMetaTitle(input: MetaTitleInput) {
   const prompt = `Generate ONE meta title (no alternatives, no quotes).

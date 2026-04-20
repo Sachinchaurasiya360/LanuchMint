@@ -2,8 +2,9 @@
 
 import { revalidatePath } from "next/cache";
 import { db } from "@launchmint/db";
-import { verifyReviewInvite } from "@launchmint/auth";
+import { verifyReviewInvite } from "@launchmint/auth/tokens";
 import { enqueue } from "@launchmint/queue";
+import { track } from "@launchmint/analytics";
 
 export interface SubmitReviewInput {
   token: string;
@@ -75,6 +76,12 @@ export async function submitReviewAction(
     reviewId: review.id,
     workspaceId: product.workspaceId,
   }).catch(() => {});
+
+  track(userByEmail?.id ?? email, "review_submitted", {
+    productId,
+    rating,
+    verified: true,
+  });
 
   revalidatePath(`/products/${product.slug}`);
   return { ok: true, productSlug: product.slug };

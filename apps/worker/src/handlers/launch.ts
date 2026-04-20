@@ -120,8 +120,9 @@ async function rankDay(dayKey: string) {
     select: { id: true },
   });
   for (let i = 0; i < entries.length; i++) {
+    const entry = entries[i]!;
     await db.launch.update({
-      where: { id: entries[i].id },
+      where: { id: entry.id },
       data: { rank: i + 1 },
     });
   }

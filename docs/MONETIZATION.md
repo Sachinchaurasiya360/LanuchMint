@@ -1,10 +1,10 @@
-# LaunchMint — Monetization, Pricing, Billing
+# LaunchMint - Monetization, Pricing, Billing
 
 This document defines pricing, plan gating, billing implementation, referrals, and affiliates.
 
 ---
 
-## Pricing tiers (recommended — final founder decision)
+## Pricing tiers (recommended - final founder decision)
 
 > Original brief specified $69 / $149 / $199 (Starter / Growth / Agency). Recommendation below restructures with a $29 Starter for solo founder ICP and a $299 Agency tier for clearer ladder. Founder may revise.
 
@@ -75,7 +75,7 @@ Free is a **viral acquisition + product-led growth** lever, not a product. Limit
 **Why this works:**
 - Founders sign up to launch, get value within an hour.
 - Hit AI / SEO / submission caps within first week if active.
-- Upgrade trigger: "You've used 30/30 AI credits — upgrade to keep generating."
+- Upgrade trigger: "You've used 30/30 AI credits - upgrade to keep generating."
 
 ---
 
@@ -123,7 +123,7 @@ aiCreditsUsed, seoChecksUsed, directorySubmissions, reviewInvitesSent, reportsEx
 ### Why Razorpay (not Stripe Billing)
 - INR-friendly (UPI, India is a major founder market).
 - Global card support adequate.
-- Stripe used **read-only** (Connect) to pull MRR for the verified MRR widget — never for billing.
+- Stripe used **read-only** (Connect) to pull MRR for the verified MRR widget - never for billing.
 - Re-evaluate at Month 12 if US/EU paid mix exceeds 60%.
 
 ### Subscription model
@@ -138,7 +138,7 @@ aiCreditsUsed, seoChecksUsed, directorySubmissions, reviewInvitesSent, reportsEx
 |-------|--------|
 | `subscription.activated` | mark `Subscription.status = ACTIVE`, set period dates |
 | `subscription.charged` | log invoice, send receipt via Resend |
-| `subscription.completed` | period end (renewing automatically — no action needed) |
+| `subscription.completed` | period end (renewing automatically - no action needed) |
 | `subscription.cancelled` | mark `cancelAtPeriodEnd = true`, send confirmation |
 | `subscription.halted` | mark `PAST_DUE`, dunning email sequence (D+1, D+3, D+7) |
 | `payment.failed` | retry via Razorpay's built-in dunning |
@@ -162,7 +162,7 @@ All webhooks HMAC-verified, idempotent (event id stored).
 
 ---
 
-## Stripe Connect (for verified MRR — NOT billing)
+## Stripe Connect (for verified MRR - NOT billing)
 
 - Founder authorizes via Stripe OAuth.
 - We store `Integration { type: STRIPE, accessToken (encrypted) }`.

@@ -1,6 +1,6 @@
 /**
  * Typed registry of all queue jobs. Add a new job by extending JobMap and
- * QUEUE_NAMES — producers and workers stay in sync via the type system.
+ * QUEUE_NAMES - producers and workers stay in sync via the type system.
  */
 
 export interface JobMap {
@@ -53,7 +53,12 @@ export interface JobMap {
   };
   "directory-verify-tick": Record<string, never>;
   "seo-snapshot-domain": { trackedDomainId: string; workspaceId: string };
+  "seo-snapshot-keywords": { productId: string; workspaceId: string };
+  "seo-snapshot-tick": Record<string, never>;
+  "verify-mrr": { productId: string };
+  "verify-mrr-tick": Record<string, never>;
   "index-product": { productId: string };
+  "index-founder": { userId: string };
   "reindex-search": { kind: "products" | "founders" | "directories" };
   "moderation-scan": { entityType: "product" | "review" | "comment"; entityId: string };
   "launch-tick": Record<string, never>;
@@ -88,7 +93,12 @@ export const JOB_TO_QUEUE: Record<JobName, QueueName> = {
   "verify-directory-backlink": "directory",
   "directory-verify-tick": "directory",
   "seo-snapshot-domain": "seo",
+  "seo-snapshot-keywords": "seo",
+  "seo-snapshot-tick": "seo",
+  "verify-mrr": "seo",
+  "verify-mrr-tick": "seo",
   "index-product": "search",
+  "index-founder": "search",
   "reindex-search": "search",
   "moderation-scan": "moderation",
   "launch-tick": "launch",

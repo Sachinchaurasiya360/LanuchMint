@@ -30,7 +30,7 @@ export async function generateMetadata({
   const dir = await getDirectory(params.slug);
   if (!dir) return { title: "Not found" };
   return buildMetadata({
-    title: `${dir.name} — Submit your startup | LaunchMint`,
+    title: `${dir.name} - Submit your startup | LaunchMint`,
     description:
       dir.description.length > 155
         ? dir.description.slice(0, 152) + "..."
@@ -113,17 +113,17 @@ export default async function DirectoryDetailPage({
           <Stat
             icon={<Gauge className="h-4 w-4" />}
             label="Domain rating"
-            value={dir.domainRating != null ? String(dir.domainRating) : "—"}
+            value={dir.domainRating != null ? String(dir.domainRating) : "-"}
           />
           <Stat
             icon={<ShieldCheck className="h-4 w-4" />}
             label="Acceptance rate"
-            value={dir.acceptanceRate ?? "—"}
+            value={dir.acceptanceRate ?? "-"}
           />
           <Stat
             icon={<Timer className="h-4 w-4" />}
             label="Review speed"
-            value={dir.reviewSpeed ?? "—"}
+            value={dir.reviewSpeed ?? "-"}
           />
         </section>
 

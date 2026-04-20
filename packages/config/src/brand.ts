@@ -1,7 +1,7 @@
 /**
  * LaunchMint brand tokens.
  * Mandate: white + yellow only as brand. No gradients. No emojis.
- * Single source of truth — consumed by tailwind preset, email templates, charts.
+ * Single source of truth - consumed by tailwind preset, email templates, charts.
  */
 
 export const brand = {

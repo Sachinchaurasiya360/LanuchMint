@@ -22,7 +22,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   if (!DATE_RE.test(params.date)) return { title: "Not found" };
   return buildMetadata({
-    title: `Launches on ${params.date} — LaunchMint`,
+    title: `Launches on ${params.date} - LaunchMint`,
     description: `Products that launched on LaunchMint on ${params.date}. See the day's leaderboard, upvotes, and comments.`,
     path: `/launches/${params.date}`,
   });

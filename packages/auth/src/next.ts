@@ -4,9 +4,11 @@
  * On first sign-in we provision a personal workspace + OWNER membership.
  */
 import NextAuth, { type NextAuthConfig, type DefaultSession } from "next-auth";
+import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
 import { db } from "@launchmint/db";
 import { WorkspaceType, Role } from "@launchmint/db";
+import { verifyPassword } from "./password.js";
 
 declare module "next-auth" {
   interface Session {
@@ -45,6 +47,43 @@ export const authConfig: NextAuthConfig = {
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       authorization: { params: { scope: "openid email profile" } },
+    }),
+    Credentials({
+      name: "Email & password",
+      credentials: {
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials) {
+        const email = String(credentials?.email ?? "")
+          .trim()
+          .toLowerCase();
+        const password = String(credentials?.password ?? "");
+        if (!email || !password) return null;
+
+        const user = await db.user.findUnique({
+          where: { email },
+          select: {
+            id: true,
+            email: true,
+            name: true,
+            avatarUrl: true,
+            passwordHash: true,
+            deletedAt: true,
+          },
+        });
+        if (!user || user.deletedAt || !user.passwordHash) return null;
+
+        const ok = await verifyPassword(password, user.passwordHash);
+        if (!ok) return null;
+
+        return {
+          id: user.id,
+          email: user.email,
+          name: user.name,
+          image: user.avatarUrl,
+        };
+      },
     }),
   ],
   session: { strategy: "jwt", maxAge: 60 * 60 * 24 * 30 },

@@ -3,7 +3,7 @@ import { createHmac, timingSafeEqual } from "node:crypto";
 /**
  * Stateless signed tokens (HMAC-SHA256). Used for things like review invites
  * where we don't want to keep a row per outstanding invite. Payload is opaque
- * to the signer — the caller decides what fields to include.
+ * to the signer - the caller decides what fields to include.
  *
  * Wire format: base64url(payloadJson) + "." + base64url(hmac)
  */
@@ -63,6 +63,7 @@ export function verifyToken<T extends { exp?: number }>(
   const parts = token.split(".");
   if (parts.length !== 2) return { ok: false, reason: "MALFORMED" };
   const [body, sig] = parts;
+  if (!body || !sig) return { ok: false, reason: "MALFORMED" };
 
   const expected = createHmac("sha256", secret).update(body).digest();
   let provided: Buffer;
@@ -89,7 +90,7 @@ export function verifyToken<T extends { exp?: number }>(
   return { ok: true, payload };
 }
 
-export interface ReviewInvitePayload {
+export interface ReviewInvitePayload extends Record<string, unknown> {
   productId: string;
   email: string;
   /** Unix seconds. */

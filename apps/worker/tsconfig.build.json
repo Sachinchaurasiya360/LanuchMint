@@ -5,7 +5,9 @@
     "noEmit": false,
     "rootDir": "src",
     "declaration": false,
-    "sourceMap": true
+    "declarationMap": false,
+    "sourceMap": true,
+    "jsx": "react-jsx"
   },
   "include": ["src/**/*"]
 }

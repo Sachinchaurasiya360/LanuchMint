@@ -17,6 +17,7 @@ import {
 } from "@launchmint/seo-meta";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { Breadcrumbs } from "@/components/breadcrumbs";
 
 export const dynamic = "force-static";
 export const revalidate = 300;
@@ -53,11 +54,19 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const founder = await getFounder(params.slug);
   if (!founder?.publishedAt) return { title: "Not found" };
+  const bio = founder.bio?.trim() ?? "";
+  const description =
+    bio.length >= 60
+      ? bio.slice(0, 160)
+      : `${founder.displayName} - ${founder.headline ?? "indie founder"} on LaunchMint.`;
+  // Thin profile = noindex. Keeps low-quality profiles out of SERPs.
+  const thin = bio.length < 120 && founder.workspace.products.length === 0;
   return buildMetadata({
-    title: `${founder.displayName}${founder.headline ? " — " + founder.headline : ""}`,
-    description: founder.bio ?? `${founder.displayName} on LaunchMint`,
+    title: `${founder.displayName}${founder.headline ? " - " + founder.headline : ""}`,
+    description,
     path: `/founders/${founder.slug}`,
     image: founder.user?.avatarUrl ?? undefined,
+    noindex: thin,
   });
 }
 
@@ -97,7 +106,13 @@ export default async function FounderPage({ params }: { params: Params }) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: renderJsonLd(jsonLd) }}
         />
-        <div className="flex items-start gap-4">
+        <Breadcrumbs
+          items={[
+            { name: "Founders", url: "/founders" },
+            { name: founder.displayName, url: path },
+          ]}
+        />
+        <div className="mt-4 flex items-start gap-4">
           <Avatar className="h-20 w-20">
             {founder.user?.avatarUrl ? (
               <AvatarImage src={founder.user.avatarUrl} alt={founder.displayName} />

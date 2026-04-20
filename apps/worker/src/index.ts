@@ -6,6 +6,9 @@ import { launchHandlers } from "./handlers/launch.js";
 import { moderationHandlers } from "./handlers/moderation.js";
 import { searchHandlers } from "./handlers/search.js";
 import { seoHandlers } from "./handlers/seo.js";
+import { captureError, flushSentry, initSentry } from "./sentry.js";
+
+initSentry();
 
 const workers = [
   createWorker(QUEUE_NAMES.email, emailHandlers, { concurrency: 8 }),
@@ -23,6 +26,7 @@ for (const w of workers) {
   });
   w.on("failed", (job, err) => {
     console.error(`[${w.name}] ${job?.name} ✗ ${err.message}`);
+    captureError(err, { queue: w.name, jobName: job?.name, jobId: job?.id });
   });
 }
 
@@ -42,7 +46,7 @@ async function bootstrapLaunchTick() {
   );
 }
 
-// Directory backlink verifier runs once per day at 03:17 UTC — chosen to
+// Directory backlink verifier runs once per day at 03:17 UTC - chosen to
 // land outside typical launch-day spikes.
 async function bootstrapDirectoryVerifyTick() {
   const q = getQueue(QUEUE_NAMES.directory);
@@ -58,11 +62,40 @@ async function bootstrapDirectoryVerifyTick() {
   );
 }
 
+// Daily SEO snapshot + MRR pull. Kept on the seo queue to serialize
+// DataForSEO / Stripe calls against per-worker concurrency.
+async function bootstrapSeoTicks() {
+  const q = getQueue(QUEUE_NAMES.seo);
+  await q.add(
+    "seo-snapshot-tick",
+    {},
+    {
+      repeat: { pattern: "41 2 * * *" },
+      jobId: "seo-snapshot-tick:repeat",
+      removeOnComplete: true,
+      removeOnFail: true,
+    },
+  );
+  await q.add(
+    "verify-mrr-tick",
+    {},
+    {
+      repeat: { pattern: "7 4 * * *" },
+      jobId: "verify-mrr-tick:repeat",
+      removeOnComplete: true,
+      removeOnFail: true,
+    },
+  );
+}
+
 bootstrapLaunchTick().catch((err) => {
   console.error("failed to schedule launch-tick", err);
 });
 bootstrapDirectoryVerifyTick().catch((err) => {
   console.error("failed to schedule directory-verify-tick", err);
+});
+bootstrapSeoTicks().catch((err) => {
+  console.error("failed to schedule seo/mrr ticks", err);
 });
 
 console.log(
@@ -72,6 +105,7 @@ console.log(
 async function shutdown() {
   console.log("shutting down workers...");
   await Promise.all(workers.map((w) => w.close()));
+  await flushSentry();
   process.exit(0);
 }
 

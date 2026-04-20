@@ -3,7 +3,8 @@
 import { revalidatePath } from "next/cache";
 import { db } from "@launchmint/db";
 import { generateReviewReply } from "@launchmint/ai";
-import { requirePermission, signReviewInvite } from "@launchmint/auth";
+import { requirePermission } from "@launchmint/auth";
+import { signReviewInvite } from "@launchmint/auth/tokens";
 import { enqueue } from "@launchmint/queue";
 import { requireSession } from "@/lib/session";
 

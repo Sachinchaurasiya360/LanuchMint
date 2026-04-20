@@ -2,7 +2,7 @@
   "name": "launchmint",
   "version": "0.1.0",
   "private": true,
-  "description": "LaunchMint — Turn visibility into velocity.",
+  "description": "LaunchMint - Turn visibility into velocity.",
   "packageManager": "pnpm@9.15.9",
   "engines": {
     "node": ">=20.0.0",
@@ -35,7 +35,14 @@
   },
   "pnpm": {
     "peerDependencyRules": {
-      "ignoreMissing": ["react", "react-dom"]
+      "ignoreMissing": [
+        "react",
+        "react-dom"
+      ]
     }
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.3"
   }
 }

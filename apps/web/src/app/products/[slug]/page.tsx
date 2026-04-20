@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { ExternalLink, MessageSquare, ShieldCheck, Star } from "lucide-react";
 import { db } from "@launchmint/db";
 import { Avatar, AvatarFallback, AvatarImage, Badge, Button } from "@launchmint/ui";
@@ -14,6 +15,8 @@ import {
 import { auth } from "@/auth";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { Breadcrumbs } from "@/components/breadcrumbs";
+import { categorySlug } from "@/lib/categories";
 import { UpvoteButton } from "./upvote-button";
 import { CommentThread, type ThreadComment } from "./comment-thread";
 
@@ -40,11 +43,20 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const product = await getProduct(params.slug);
   if (!product) return { title: "Not found" };
+  const description =
+    product.metaDescription ??
+    (product.description && product.description.length > product.tagline.length
+      ? `${product.tagline}. ${product.description.slice(0, 120)}`.slice(0, 160)
+      : product.tagline);
+  // Thin-content guard: fewer than 120 chars of description = noindex until the
+  // founder fills it in. Keeps low-quality profile pages out of the index.
+  const thin = (product.description?.trim().length ?? 0) < 120;
   return buildMetadata({
-    title: product.metaTitle ?? `${product.name} — ${product.tagline}`,
-    description: product.metaDescription ?? product.tagline,
+    title: product.metaTitle ?? `${product.name} - ${product.tagline}`,
+    description,
     path: `/products/${product.slug}`,
     image: product.ogImageUrl ?? product.logoUrl ?? undefined,
+    noindex: thin,
   });
 }
 
@@ -55,34 +67,39 @@ export default async function PublicProductPage({ params }: { params: Params }) 
   const session = await auth();
   const viewerId = session?.user?.id ?? null;
 
-  const [upvoteCount, viewerUpvote, commentRows, reviewRows] = await Promise.all([
-    db.upvote.count({ where: { productId: product.id } }),
-    viewerId
-      ? db.upvote.findUnique({
-          where: { productId_userId: { productId: product.id, userId: viewerId } },
-          select: { id: true },
-        })
-      : Promise.resolve(null),
-    db.comment.findMany({
-      where: { productId: product.id, status: "PUBLISHED", deletedAt: null },
-      orderBy: { createdAt: "asc" },
-      include: {
-        author: { select: { id: true, name: true, avatarUrl: true } },
-      },
-    }),
-    db.review.findMany({
-      where: {
-        productId: product.id,
-        status: "PUBLISHED",
-        deletedAt: null,
-      },
-      orderBy: [{ publishedAt: "desc" }],
-      include: {
-        author: { select: { name: true, avatarUrl: true } },
-        reply: true,
-      },
-    }),
-  ]);
+  const [upvoteCount, viewerUpvote, commentRows, reviewRows, mrrSnap] =
+    await Promise.all([
+      db.upvote.count({ where: { productId: product.id } }),
+      viewerId
+        ? db.upvote.findUnique({
+            where: { productId_userId: { productId: product.id, userId: viewerId } },
+            select: { id: true },
+          })
+        : Promise.resolve(null),
+      db.comment.findMany({
+        where: { productId: product.id, status: "PUBLISHED", deletedAt: null },
+        orderBy: { createdAt: "asc" },
+        include: {
+          author: { select: { id: true, name: true, avatarUrl: true } },
+        },
+      }),
+      db.review.findMany({
+        where: {
+          productId: product.id,
+          status: "PUBLISHED",
+          deletedAt: null,
+        },
+        orderBy: [{ publishedAt: "desc" }],
+        include: {
+          author: { select: { name: true, avatarUrl: true } },
+          reply: true,
+        },
+      }),
+      db.mrrSnapshot.findFirst({
+        where: { productId: product.id, source: "stripe" },
+        orderBy: { capturedAt: "desc" },
+      }),
+    ]);
 
   const founder = product.workspace.founderProfile;
   const path = `/products/${product.slug}`;
@@ -112,6 +129,7 @@ export default async function PublicProductPage({ params }: { params: Params }) 
     breadcrumbJsonLd([
       { name: "Home", url: "/" },
       { name: "Products", url: "/products" },
+      { name: product.category, url: `/categories/${categorySlug(product.category)}` },
       { name: product.name, url: path },
     ]),
     ...reviewRows.slice(0, 20).map((r) =>
@@ -128,6 +146,20 @@ export default async function PublicProductPage({ params }: { params: Params }) 
     ),
   ];
 
+  const related = await db.product.findMany({
+    where: {
+      category: product.category,
+      status: "LIVE",
+      deletedAt: null,
+      id: { not: product.id },
+    },
+    orderBy: [{ publishedAt: "desc" }],
+    take: 6,
+    select: { id: true, slug: true, name: true, tagline: true },
+  });
+  const categoryHref = `/categories/${categorySlug(product.category)}`;
+  const bestHref = `/best/${categorySlug(product.category)}`;
+
   const threaded = buildThread(commentRows);
 
   return (
@@ -138,14 +170,24 @@ export default async function PublicProductPage({ params }: { params: Params }) 
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: renderJsonLd(jsonLd) }}
         />
-        <div className="flex items-start gap-4">
+        <Breadcrumbs
+          items={[
+            { name: "Products", url: "/products" },
+            {
+              name: product.category,
+              url: `/categories/${categorySlug(product.category)}`,
+            },
+            { name: product.name, url: path },
+          ]}
+        />
+        <div className="mt-4 flex items-start gap-4">
           {product.logoUrl ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
+            <Image
               src={product.logoUrl}
               alt={`${product.name} logo`}
               width={64}
               height={64}
+              priority
               className="rounded-lg border"
             />
           ) : null}
@@ -199,6 +241,24 @@ export default async function PublicProductPage({ params }: { params: Params }) 
             {product.description}
           </p>
         </section>
+
+        {mrrSnap ? (
+          <section className="mt-6 inline-flex items-center gap-3 rounded-lg border bg-secondary/30 px-4 py-3">
+            <ShieldCheck className="h-4 w-4" />
+            <div>
+              <p className="text-xs font-medium uppercase text-muted-foreground">
+                Verified MRR
+              </p>
+              <p className="text-lg font-semibold">
+                ${(mrrSnap.mrrCents / 100).toLocaleString()}{" "}
+                <span className="text-xs font-normal text-muted-foreground">
+                  {mrrSnap.currency.toUpperCase()} · via Stripe ·{" "}
+                  {mrrSnap.capturedAt.toISOString().slice(0, 10)}
+                </span>
+              </p>
+            </div>
+          </section>
+        ) : null}
 
         {founder ? (
           <section className="mt-10 rounded-lg border p-4">
@@ -274,6 +334,51 @@ export default async function PublicProductPage({ params }: { params: Params }) 
             </ul>
           )}
         </section>
+
+        {related.length > 0 ? (
+          <section className="mt-10">
+            <div className="flex items-end justify-between">
+              <h2 className="text-lg font-semibold">
+                More {product.category.toLowerCase()}
+              </h2>
+              <div className="flex gap-4 text-xs text-muted-foreground">
+                <Link href={categoryHref} className="hover:underline">
+                  All {product.category.toLowerCase()} →
+                </Link>
+                <Link href={bestHref} className="hover:underline">
+                  Best of →
+                </Link>
+              </div>
+            </div>
+            <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+              {related.map((r) => (
+                <li
+                  key={r.id}
+                  className="rounded-lg border p-3 transition hover:border-foreground/20 hover:bg-secondary/30"
+                >
+                  <Link
+                    href={`/products/${r.slug}`}
+                    className="block"
+                  >
+                    <p className="text-sm font-semibold">{r.name}</p>
+                    <p className="mt-1 line-clamp-2 text-xs text-muted-foreground">
+                      {r.tagline}
+                    </p>
+                  </Link>
+                  <p className="mt-2 text-xs text-muted-foreground">
+                    Compare:{" "}
+                    <Link
+                      href={`/compare/${product.slug}-vs-${r.slug}`}
+                      className="underline"
+                    >
+                      {product.name} vs {r.name}
+                    </Link>
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ) : null}
 
         <section className="mt-10">
           <h2 className="flex items-center gap-2 text-lg font-semibold">

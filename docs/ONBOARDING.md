@@ -1,4 +1,4 @@
-# LaunchMint — Onboarding, Checklists, Workflows, Analytics
+# LaunchMint - Onboarding, Checklists, Workflows, Analytics
 
 This document covers user onboarding, launch checklists, moderation workflows, SEO workflows, analytics events, and KPIs.
 
@@ -6,42 +6,42 @@ This document covers user onboarding, launch checklists, moderation workflows, S
 
 ## Onboarding flow (target: < 5 min to first launch draft)
 
-### Step 0 — Sign in
+### Step 0 - Sign in
 - One-click Google OAuth.
 - New user → workspace auto-created (`{firstName}-workspace`).
 - Free plan auto-assigned.
 
-### Step 1 — "What's your product URL?"
+### Step 1 - "What's your product URL?"
 - Single input.
 - On submit: `scrape-meta` job runs in background while user sees prefilled-in-progress UI.
-- Skips allowed — empty product can be filled manually.
+- Skips allowed - empty product can be filled manually.
 
-### Step 2 — Confirm product details
+### Step 2 - Confirm product details
 - AI-prefilled: name, tagline, 250-word description, category, 5 SEO keywords, meta title, meta description.
 - Founder edits inline.
 - Logo extracted from favicon / og:image; founder can upload a better one.
 
-### Step 3 — Confirm founder details
+### Step 3 - Confirm founder details
 - Pre-filled from Google account (name, email, avatar).
 - Adds: headline (placeholder: "Founder of [product]"), location, X handle, LinkedIn URL.
 - Generates founder slug (`/founders/[slug]`).
 
-### Step 4 — Choose launch date
+### Step 4 - Choose launch date
 - Two options: "Launch today" (immediate) or "Schedule" (date picker, 1–60 days out).
 - Timezone defaults to browser TZ.
 
-### Step 5 — Connect Stripe (optional, skippable)
-- Banner: "Connect Stripe to display verified MRR — boosts trust score by 15 points."
+### Step 5 - Connect Stripe (optional, skippable)
+- Banner: "Connect Stripe to display verified MRR - boosts trust score by 15 points."
 - Clicking opens Stripe Connect OAuth.
 - Skip → can be done later from Settings.
 
-### Step 6 — Pick directories to submit to (optional, skippable)
+### Step 6 - Pick directories to submit to (optional, skippable)
 - AI-prioritized top 25 directories shown, pre-selected.
 - Founder unchecks any they don't want.
 - Click "Generate descriptions" → AI generates per-directory description in background.
 - Skip → all directories deferred to Directories tab.
 
-### Step 7 — Review & publish
+### Step 7 - Review & publish
 - Live preview of `/products/[slug]` page (in iframe).
 - Launch readiness score shown (out of 100) with checklist of what's missing.
 - Two CTAs: "Save as draft" or "Publish" (yellow).
@@ -58,7 +58,7 @@ This document covers user onboarding, launch checklists, moderation workflows, S
 Persistent card on `/app` home until all items complete:
 
 - [ ] Add a product (10 pts)
-- [ ] Complete founder profile — bio, location, social links (10 pts)
+- [ ] Complete founder profile - bio, location, social links (10 pts)
 - [ ] Add product logo (5 pts)
 - [ ] Add at least 3 screenshots (10 pts)
 - [ ] Complete product description (≥ 200 words) (10 pts)
@@ -73,7 +73,7 @@ Score → Launch readiness percentage. Hides when 100%.
 
 ---
 
-## Launch checklist (per launch — surfaced inside `/app/launches/[id]`)
+## Launch checklist (per launch - surfaced inside `/app/launches/[id]`)
 
 - [ ] Product name confirmed
 - [ ] Tagline (5–12 words) approved
@@ -129,12 +129,12 @@ System blocks LIVE publication if score < 70 (founder can override with explicit
 ## SEO workflows
 
 ### Per-product daily
-1. **02:00 UTC** — `seo-daily` job runs for all tracked domains: pulls DR, organic traffic, spam score from DataForSEO. Stores in `SeoSnapshot`.
+1. **02:00 UTC** - `seo-daily` job runs for all tracked domains: pulls DR, organic traffic, spam score from DataForSEO. Stores in `SeoSnapshot`.
 2. If DR drops > 5 points → trigger alert (V1).
 3. If spam score > 30 → flag in admin queue.
 
 ### Per-product weekly (Mon 03:00 UTC)
-1. **`seo-weekly`** — pulls top 100 backlinks + keyword rankings.
+1. **`seo-weekly`** - pulls top 100 backlinks + keyword rankings.
 2. Compare to last week's snapshot:
    - New backlinks → log + push to Notification queue (V1).
    - Lost backlinks → log + push to Notification queue.

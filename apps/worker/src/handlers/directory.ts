@@ -5,6 +5,7 @@ import {
   type DirectoryCandidate,
 } from "@launchmint/ai";
 import { enqueue, type HandlerMap } from "@launchmint/queue";
+import { track } from "@launchmint/analytics";
 
 const VERIFY_INTERVAL_DAYS = 1;
 const VERIFY_TIMEOUT_MS = 12_000;
@@ -32,14 +33,11 @@ export const directoryHandlers: HandlerMap = {
     });
     if (!product) return;
 
+    // Pull a high-DR-weighted pool. The AI ranker will narrow this to the
+    // best-fit candidates - we keep the SQL prefilter loose so a niche
+    // product still benefits from generalist directories like Product Hunt.
     const candidates = await db.directory.findMany({
-      where: {
-        status: "ACTIVE",
-        OR: [
-          { category: { has: product.category } },
-          { category: { isEmpty: false } },
-        ],
-      },
+      where: { status: "ACTIVE" },
       orderBy: [{ domainRating: "desc" }],
       take: RECOMMEND_CANDIDATE_POOL,
       select: {
@@ -103,7 +101,7 @@ export const directoryHandlers: HandlerMap = {
    * Per-submission worker. For form-only directories it generates a tailored
    * description and marks the submission IN_PROGRESS so the founder can copy +
    * submit manually. For API-enabled directories the handler is the place to
-   * call the directory's POST endpoint — for now we mark SUBMITTED with a note
+   * call the directory's POST endpoint - for now we mark SUBMITTED with a note
    * so the verify-tick can take over backlink polling.
    */
   "submit-directory": async (data) => {
@@ -144,6 +142,11 @@ export const directoryHandlers: HandlerMap = {
             "Submitted via directory API. Awaiting indexing.",
         },
       });
+      track(submission.product.workspaceId, "directory_submitted", {
+        directoryId: submission.directoryId,
+        productId: submission.productId,
+        method: "auto",
+      });
       return;
     }
 
@@ -173,6 +176,11 @@ export const directoryHandlers: HandlerMap = {
         notes: "Description ready. Submit manually via the directory's form.",
       },
     });
+    track(submission.product.workspaceId, "directory_submitted", {
+      directoryId: submission.directoryId,
+      productId: submission.productId,
+      method: "manual",
+    });
   },
 
   /**
@@ -199,6 +207,15 @@ export const directoryHandlers: HandlerMap = {
 
     if (found) {
       const now = new Date();
+      const daysToLive = submission.submittedAt
+        ? Math.max(
+            0,
+            Math.round(
+              (now.getTime() - submission.submittedAt.getTime()) /
+                (1000 * 60 * 60 * 24),
+            ),
+          )
+        : 0;
       await db.directorySubmission.update({
         where: { id: submission.id },
         data: {
@@ -206,6 +223,11 @@ export const directoryHandlers: HandlerMap = {
           livedAt: now,
           liveUrl: found.url,
         },
+      });
+      track(submission.workspaceId, "directory_went_live", {
+        directoryId: submission.directoryId,
+        productId: submission.product.id,
+        daysToLive,
       });
       await db.backlink
         .upsert({
@@ -305,7 +327,7 @@ async function findBacklink(
       const match = html.match(re);
       if (match) return { url: pageUrl };
     } catch {
-      // ignore — try next URL
+      // ignore - try next URL
     }
   }
   return null;

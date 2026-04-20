@@ -1,4 +1,4 @@
-# LaunchMint — API Reference
+# LaunchMint - API Reference
 
 **Base URL:** `https://launchmint.com/api/v1`
 **Auth:** Bearer JWT in `Authorization` header (or HTTP-only cookie for browser).
@@ -35,14 +35,14 @@
 ```
 
 ### Standard error codes
-- `UNAUTHORIZED` — no/invalid auth
-- `FORBIDDEN` — auth ok, no permission
-- `NOT_FOUND` — resource missing
-- `VALIDATION_FAILED` — body invalid
-- `RATE_LIMITED` — too many requests
-- `QUOTA_EXCEEDED` — plan usage cap hit
-- `INTEGRATION_ERROR` — upstream (Stripe, Gemini, DataForSEO) failed
-- `INTERNAL_ERROR` — server bug; logged to Sentry with `requestId`
+- `UNAUTHORIZED` - no/invalid auth
+- `FORBIDDEN` - auth ok, no permission
+- `NOT_FOUND` - resource missing
+- `VALIDATION_FAILED` - body invalid
+- `RATE_LIMITED` - too many requests
+- `QUOTA_EXCEEDED` - plan usage cap hit
+- `INTEGRATION_ERROR` - upstream (Stripe, Gemini, DataForSEO) failed
+- `INTERNAL_ERROR` - server bug; logged to Sentry with `requestId`
 
 ### Pagination
 
@@ -98,7 +98,7 @@ PATCH  /api/v1/workspaces/:id/members/:uid   Change role
 ```
 GET    /api/v1/products                      List my products
 POST   /api/v1/products                      Create product (returns id + slug)
-GET    /api/v1/products/:id                  Full detail (auth) — or use slug for public
+GET    /api/v1/products/:id                  Full detail (auth) - or use slug for public
 PATCH  /api/v1/products/:id
 DELETE /api/v1/products/:id                  Soft delete
 POST   /api/v1/products/:id/publish          Move from DRAFT → SCHEDULED/LIVE

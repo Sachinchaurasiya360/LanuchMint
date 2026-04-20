@@ -9,7 +9,7 @@ import { dayBoundsUtc, getLeaderboardForRange, todayKeyUtc } from "@/lib/launche
 export const revalidate = 60;
 
 export const metadata: Metadata = buildMetadata({
-  title: "Today's launches — LaunchMint",
+  title: "Today's launches - LaunchMint",
   description:
     "The products launching on LaunchMint right now. Upvote, comment, and discover what indie founders are shipping today.",
   path: "/today",

@@ -21,7 +21,7 @@ export function LaunchLiveEmail({
       </Heading>
       <Text style={{ fontSize: 14, lineHeight: "22px", color: "#404040" }}>
         Your launch page is on the leaderboard for the next 24 hours. Time
-        spent in the comments converts upvotes — be present.
+        spent in the comments converts upvotes - be present.
       </Text>
       <Text style={{ fontSize: 14, lineHeight: "22px", color: "#404040" }}>
         Cross-post to X, LinkedIn, Show HN, and Indie Hackers in the next hour

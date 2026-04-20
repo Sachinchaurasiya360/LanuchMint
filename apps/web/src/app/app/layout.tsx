@@ -2,13 +2,17 @@ import Link from "next/link";
 import {
   BarChart3,
   Building2,
+  CreditCard,
   LayoutDashboard,
   Package,
   Rocket,
   Settings,
+  Shield,
   User,
 } from "lucide-react";
+import { db } from "@launchmint/db";
 import { auth, signOut } from "@/auth";
+import { CommandPalette } from "@/components/command-palette";
 
 const NAV = [
   { href: "/app", label: "Dashboard", icon: LayoutDashboard },
@@ -16,6 +20,7 @@ const NAV = [
   { href: "/app/launches", label: "Launches", icon: Rocket },
   { href: "/app/profile", label: "Founder profile", icon: User },
   { href: "/app/seo", label: "SEO", icon: BarChart3 },
+  { href: "/app/billing", label: "Billing", icon: CreditCard },
   { href: "/app/workspace", label: "Workspace", icon: Building2 },
   { href: "/app/settings", label: "Settings", icon: Settings },
 ];
@@ -26,6 +31,13 @@ export default async function AppLayout({
   children: React.ReactNode;
 }) {
   const session = await auth();
+  const staff = session?.user?.id
+    ? await db.user.findUnique({
+        where: { id: session.user.id },
+        select: { isSuperAdmin: true, isModerator: true },
+      })
+    : null;
+  const showAdmin = Boolean(staff?.isSuperAdmin || staff?.isModerator);
   return (
     <div className="flex min-h-screen">
       <aside className="hidden w-60 shrink-0 border-r bg-secondary/30 sm:flex sm:flex-col">
@@ -46,6 +58,15 @@ export default async function AppLayout({
               {item.label}
             </Link>
           ))}
+          {showAdmin ? (
+            <Link
+              href="/app/admin/moderation"
+              className="flex items-center gap-2 rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-background hover:text-foreground"
+            >
+              <Shield className="h-4 w-4" aria-hidden />
+              Admin
+            </Link>
+          ) : null}
         </nav>
         <div className="border-t p-3">
           <p className="truncate text-xs text-muted-foreground">
@@ -67,6 +88,7 @@ export default async function AppLayout({
         </div>
       </aside>
       <main className="flex-1">{children}</main>
+      <CommandPalette />
     </div>
   );
 }

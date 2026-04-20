@@ -22,7 +22,7 @@ export function ReviewInviteEmail({
       <Text style={{ fontSize: 14, lineHeight: "22px", color: "#404040" }}>
         {founderName} asked us to send this. Your review will appear on the
         {" "}
-        {productName} page on LaunchMint, with a "Verified Customer" badge —
+        {productName} page on LaunchMint, with a "Verified Customer" badge -
         because the link came from the email they have on file.
       </Text>
       {personalNote ? (

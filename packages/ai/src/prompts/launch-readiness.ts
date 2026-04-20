@@ -30,7 +30,7 @@ Score rubric:
 - 90-100: ready to launch today
 - 70-89:  small polish items remain
 - 50-69:  significant gaps in copy, assets, or positioning
-- 0-49:   not ready — fundamental work missing
+- 0-49:   not ready - fundamental work missing
 
 Schema:
 { "score": number 0-100, "summary": string <= 140 chars, "blockers": string[] (must-fix), "suggestions": string[] (nice-to-have) }`;

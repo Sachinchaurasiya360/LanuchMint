@@ -64,7 +64,7 @@ export function InviteReviewersForm({ productId }: { productId: string }) {
           value={note}
           onChange={(e) => setNote(e.target.value)}
           maxLength={200}
-          placeholder="Thanks for trying us in beta — would love your honest take."
+          placeholder="Thanks for trying us in beta - would love your honest take."
           className="mt-1"
         />
       </div>

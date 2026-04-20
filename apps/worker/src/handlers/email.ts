@@ -41,7 +41,7 @@ export const emailHandlers: HandlerMap = {
   "send-payment-receipt": async (data) => {
     await sendEmail({
       to: data.userId,
-      subject: `Receipt — ${data.plan}`,
+      subject: `Receipt - ${data.plan}`,
       template: PaymentReceiptEmail({
         firstName: "there",
         plan: data.plan,

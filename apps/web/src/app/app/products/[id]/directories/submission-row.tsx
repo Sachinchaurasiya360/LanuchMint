@@ -222,7 +222,7 @@ export function SubmissionRow({
                 htmlFor={`live-${submission.id}`}
                 className="text-xs text-muted-foreground"
               >
-                Live URL (optional — paste once published)
+                Live URL (optional - paste once published)
               </label>
               <Input
                 id={`live-${submission.id}`}

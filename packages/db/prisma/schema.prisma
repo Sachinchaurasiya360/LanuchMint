@@ -21,6 +21,7 @@ model User {
   name          String?
   avatarUrl     String?
   googleId      String?   @unique
+  passwordHash  String?
   isSuperAdmin  Boolean   @default(false)
   isModerator   Boolean   @default(false)
   createdAt     DateTime  @default(now())

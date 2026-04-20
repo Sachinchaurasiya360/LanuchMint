@@ -8,7 +8,7 @@ export interface WelcomeEmailProps {
 
 export function WelcomeEmail({ firstName, dashboardUrl }: WelcomeEmailProps) {
   return (
-    <EmailLayout preview="Welcome to LaunchMint — let's get your launch ready.">
+    <EmailLayout preview="Welcome to LaunchMint - let's get your launch ready.">
       <Heading style={{ fontSize: 22, margin: "0 0 12px" }}>
         Welcome, {firstName}.
       </Heading>

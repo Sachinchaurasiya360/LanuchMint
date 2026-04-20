@@ -5,7 +5,7 @@ let cached: Stripe | null = null;
 /**
  * Stripe is read-only here: we use Stripe Connect to pull verified MRR
  * from connected founder accounts to power the "Verified MRR" badge.
- * We do NOT charge customers via Stripe — Razorpay handles billing.
+ * We do NOT charge customers via Stripe - Razorpay handles billing.
  */
 export function getStripe(): Stripe {
   if (cached) return cached;
@@ -13,7 +13,7 @@ export function getStripe(): Stripe {
   if (!key) {
     throw new Error("STRIPE_CLIENT_SECRET not set");
   }
-  cached = new Stripe(key, { apiVersion: "2024-11-20.acacia" });
+  cached = new Stripe(key, { apiVersion: "2025-02-24.acacia" });
   return cached;
 }
 

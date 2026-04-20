@@ -14,7 +14,7 @@ export interface PaymentReceiptEmailProps {
 
 export function PaymentReceiptEmail(props: PaymentReceiptEmailProps) {
   return (
-    <EmailLayout preview={`Receipt for ${props.plan} — ${props.amount} ${props.currency}`}>
+    <EmailLayout preview={`Receipt for ${props.plan} - ${props.amount} ${props.currency}`}>
       <Heading style={{ fontSize: 22, margin: "0 0 12px" }}>Payment received</Heading>
       <Text style={{ fontSize: 14, lineHeight: "22px", color: "#404040" }}>
         Thanks, {props.firstName}. Your subscription to the{" "}

@@ -53,7 +53,7 @@ export default async function ProductDirectoriesPage({
       <header className="mt-3 flex items-baseline justify-between gap-4">
         <div>
           <h1 className="text-2xl font-semibold tracking-tight">
-            Directory submissions — {product.name}
+            Directory submissions - {product.name}
           </h1>
           <p className="mt-1 text-sm text-muted-foreground">
             AI ranks the best directories for this product, then drafts
@@ -81,7 +81,7 @@ export default async function ProductDirectoriesPage({
       <Section
         productId={product.id}
         title={`Awaiting backlink (${grouped.submitted.length})`}
-        description="Submitted — we'll poll for the live listing daily."
+        description="Submitted - we'll poll for the live listing daily."
         empty="No pending verifications."
         items={grouped.submitted}
       />

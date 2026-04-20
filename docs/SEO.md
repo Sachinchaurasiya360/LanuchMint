@@ -1,4 +1,4 @@
-# LaunchMint — SEO Strategy
+# LaunchMint - SEO Strategy
 
 LaunchMint is **an SEO product**, so its own SEO must be exemplary. This document defines the programmatic SEO strategy, content strategy, technical SEO baseline, and SEO data sourcing.
 
@@ -55,7 +55,7 @@ Each launch, review, and submission produces a permanent, indexable asset. We co
 ## Technical SEO baseline (every page)
 
 ### Required on every page
-- Server-rendered HTML (SSR or ISR — never client-only).
+- Server-rendered HTML (SSR or ISR - never client-only).
 - One `<h1>` per page, descriptive of the unique entity.
 - Semantic structure: `<article>`, `<section>`, `<nav>`, `<aside>`.
 - Canonical URL.
@@ -70,7 +70,7 @@ Each launch, review, and submission produces a permanent, indexable asset. We co
 - **INP** ≤ 200 ms
 - **CLS** ≤ 0.1
 - **Total transfer size** ≤ 250 KB compressed (excluding hero image)
-- **No client-side hydration for read-only sections** — Next.js Server Components.
+- **No client-side hydration for read-only sections** - Next.js Server Components.
 
 ### Image optimization
 - All images via `next/image` with `width`/`height`.
@@ -80,7 +80,7 @@ Each launch, review, and submission produces a permanent, indexable asset. We co
 - `loading="eager"` only on the hero LCP image.
 
 ### Crawl efficiency
-- `robots.txt` — Allow all public, disallow `/app/*`, `/api/*` (except `/api/v1/public/*`).
+- `robots.txt` - Allow all public, disallow `/app/*`, `/api/*` (except `/api/v1/public/*`).
 - Sitemap index + 5+ split sitemaps (50k URLs each).
 - IndexNow ping on every publish/update.
 - Sitemaps submitted to GSC + Bing Webmaster Tools.
@@ -128,7 +128,7 @@ Implemented in `packages/seo-meta/jsonld.ts`. Every public page emits the approp
 
 ---
 
-## Programmatic SEO — quality gates
+## Programmatic SEO - quality gates
 
 The fastest way to a Google penalty is mass-producing thin pages. Our gates:
 
@@ -138,7 +138,7 @@ The fastest way to a Google penalty is mass-producing thin pages. Our gates:
 - AI-generated boilerplate is allowed only for sections clearly differentiated by entity data.
 
 ### De-duplication
-- Comparison pages render distinct content for `a-vs-b` and `b-vs-a` (we redirect one to the other based on alphabetical order — canonical is `min(a,b)-vs-max(a,b)`).
+- Comparison pages render distinct content for `a-vs-b` and `b-vs-a` (we redirect one to the other based on alphabetical order - canonical is `min(a,b)-vs-max(a,b)`).
 - Alternatives pages link to the source product's page; do not duplicate descriptions.
 
 ### Freshness
@@ -147,7 +147,7 @@ The fastest way to a Google penalty is mass-producing thin pages. Our gates:
 
 ### Crawl budget protection
 - `noindex` low-quality pages (deleted founders, archived products).
-- Use `disallow` for filter URLs (e.g., `/directories?cost=free`) — only the canonical lists are indexed.
+- Use `disallow` for filter URLs (e.g., `/directories?cost=free`) - only the canonical lists are indexed.
 
 ### Internal linking automation
 - Every product page links to: founder profile, category, top 3 alternatives, top 3 comparison pages.
@@ -159,11 +159,11 @@ The fastest way to a Google penalty is mass-producing thin pages. Our gates:
 ## SEO data sourcing
 
 ### Primary source: DataForSEO
-- DR (Domain Authority) — daily for tracked domains, cached 24h.
-- Backlinks — weekly snapshot of top 100, full crawl monthly.
-- Keyword rankings — weekly for tracked keywords, default country = US, founder can configure.
-- Search volume + difficulty — on-demand for keyword research tool.
-- Spam score — weekly.
+- DR (Domain Authority) - daily for tracked domains, cached 24h.
+- Backlinks - weekly snapshot of top 100, full crawl monthly.
+- Keyword rankings - weekly for tracked keywords, default country = US, founder can configure.
+- Search volume + difficulty - on-demand for keyword research tool.
+- Spam score - weekly.
 
 ### Cost guard
 - DataForSEO is pay-as-you-go. Cache aggressively.
@@ -174,7 +174,7 @@ The fastest way to a Google penalty is mass-producing thin pages. Our gates:
 - Agency: pooled across clients.
 
 ### Future sources (V1+)
-- Google Search Console API for owned-domain data (requires user OAuth — much richer than third-party estimates).
+- Google Search Console API for owned-domain data (requires user OAuth - much richer than third-party estimates).
 - Bing Webmaster Tools API.
 - Internal "real" backlink crawler (cheaper at scale, V2).
 
@@ -183,11 +183,11 @@ The fastest way to a Google penalty is mass-producing thin pages. Our gates:
 ## Content strategy (founder-led editorial)
 
 ### Pillar topics (primary content categories)
-1. **Launch playbooks** — "How to launch on X", post-launch retros, anti-patterns.
-2. **SEO for founders** — tutorials, case studies from our own data.
-3. **Indie traction reports** — weekly / monthly data drops from our DB.
-4. **Founder interviews** — long-form (2,000+ words).
-5. **Tool deep-dives** — competitor analyses, alternatives roundups.
+1. **Launch playbooks** - "How to launch on X", post-launch retros, anti-patterns.
+2. **SEO for founders** - tutorials, case studies from our own data.
+3. **Indie traction reports** - weekly / monthly data drops from our DB.
+4. **Founder interviews** - long-form (2,000+ words).
+5. **Tool deep-dives** - competitor analyses, alternatives roundups.
 
 ### Cadence (MVP → V1)
 - 2 founder interviews / week
@@ -209,7 +209,7 @@ The fastest way to a Google penalty is mass-producing thin pages. Our gates:
 
 ---
 
-## On-page SEO checklist (per launch — surfaced in app)
+## On-page SEO checklist (per launch - surfaced in app)
 
 - [ ] Title 50–60 chars including primary keyword
 - [ ] Meta description 140–160 chars

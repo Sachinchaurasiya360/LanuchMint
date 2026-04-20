@@ -4,6 +4,11 @@ export const SITE = {
   description: "Turn visibility into velocity. Launch, get reviews, and grow with SEO.",
   logo: "/brand/logo.svg",
   twitter: "@launchmint",
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION,
+    bing: process.env.BING_SITE_VERIFICATION,
+    yandex: process.env.YANDEX_VERIFICATION,
+  },
 } as const;
 
 export function abs(path: string): string {

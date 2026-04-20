@@ -1,4 +1,5 @@
 import { db } from "@launchmint/db";
+import { track } from "@launchmint/analytics";
 import { COST_PER_1M_TOKENS, getGemini, type GeminiModel } from "./client.js";
 
 export interface GenerateArgs {
@@ -53,6 +54,7 @@ export async function generate(args: GenerateArgs): Promise<GenerateResult> {
           (outputTokens / 1_000_000) * rate.output) *
           100,
       );
+      const latencyMs = Date.now() - startedAt;
       await db.aiGeneration
         .create({
           data: {
@@ -67,12 +69,19 @@ export async function generate(args: GenerateArgs): Promise<GenerateResult> {
             status,
             prompt: args.prompt.slice(0, 4_000),
             output: text.slice(0, 4_000),
-            latencyMs: Date.now() - startedAt,
+            latencyMs,
           },
         })
         .catch(() => {
           // best-effort logging
         });
+      track(args.userId ?? args.workspaceId, "ai_generation_requested", {
+        type: args.purpose ?? "ad-hoc",
+        model: args.model,
+        creditsCharged: 1,
+        latencyMs,
+        status: status === "success" ? "ok" : "error",
+      });
     }
   }
 

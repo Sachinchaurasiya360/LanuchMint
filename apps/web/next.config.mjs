@@ -25,6 +25,31 @@ const nextConfig = {
       { protocol: "http", hostname: "localhost" },
     ],
   },
+  webpack: (config) => {
+    config.resolve.extensionAlias = {
+      ".js": [".ts", ".tsx", ".js"],
+      ".mjs": [".mts", ".mjs"],
+    };
+    return config;
+  },
 };
 
-export default nextConfig;
+// Sentry is opt-in via env. Import lazily so local dev doesn't require the
+// @sentry/nextjs package to be installed when no DSN is configured.
+const sentryEnabled = Boolean(
+  process.env.SENTRY_DSN || process.env.NEXT_PUBLIC_SENTRY_DSN,
+);
+
+export default sentryEnabled
+  ? (async () => {
+      const { withSentryConfig } = await import("@sentry/nextjs");
+      return withSentryConfig(nextConfig, {
+        silent: true,
+        org: process.env.SENTRY_ORG,
+        project: process.env.SENTRY_PROJECT,
+        widenClientFileUpload: true,
+        hideSourceMaps: true,
+        disableLogger: true,
+      });
+    })()
+  : nextConfig;

@@ -51,7 +51,7 @@ export default async function ProductReviewsPage({ params }: { params: Params })
       <header className="mt-3 flex items-baseline justify-between">
         <div>
           <h1 className="text-2xl font-semibold tracking-tight">
-            Reviews — {product.name}
+            Reviews - {product.name}
           </h1>
           <p className="mt-1 text-sm text-muted-foreground">
             Invite customers, reply to feedback, and moderate flagged reviews.
