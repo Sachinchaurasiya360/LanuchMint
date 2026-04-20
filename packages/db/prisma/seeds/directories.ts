@@ -1,5 +1,5 @@
 /**
- * Curated directory database — 200 entries.
+ * Curated directory database - 200 entries.
  *
  * Sourced from public listings as of 2026-04. URLs and metrics need
  * periodic re-verification; the `directory-verify` job covers backlinks
@@ -122,7 +122,7 @@ const HIGH_DR_LAUNCH: DirectorySeed[] = [
     url: "https://www.getapp.com",
     description: "Gartner-owned SaaS marketplace. Sister to Capterra.",
     category: ["saas", "b2b"],
-    niche: "B2B SaaS — same sign-up as Capterra",
+    niche: "B2B SaaS - same sign-up as Capterra",
     domainRating: 86,
     cost: "FREEMIUM",
   },
@@ -131,7 +131,7 @@ const HIGH_DR_LAUNCH: DirectorySeed[] = [
     name: "AlternativeTo",
     url: "https://alternativeto.net",
     submitUrl: "https://alternativeto.net/software/-/submit/",
-    description: "Crowdsourced alternatives database — listed as alternative to incumbents.",
+    description: "Crowdsourced alternatives database - listed as alternative to incumbents.",
     category: ["saas", "comparison"],
     niche: "Products competing with a well-known incumbent",
     domainRating: 85,
@@ -621,7 +621,7 @@ function buildSynthetic(): DirectorySeed[] {
         name,
         url: `https://${slug}.example.com`,
         submitUrl: `https://${slug}.example.com/submit`,
-        description: `Curated list of ${group.niche.toLowerCase()} tools for founders and operators. Placeholder entry — replace with verified URL during curation.`,
+        description: `Curated list of ${group.niche.toLowerCase()} tools for founders and operators. Placeholder entry - replace with verified URL during curation.`,
         category: group.category,
         niche: `${group.niche} tools`,
         domainRating: group.drBase + ((i * 7) % 11),

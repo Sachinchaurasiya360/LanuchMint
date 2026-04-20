@@ -18,4 +18,4 @@ const newProduct = await scoped.product.create({
 });
 ```
 
-The scoped client auto-injects `workspaceId` on every query and create. Forgetting to scope is a multi-tenant data leak — use the helper.
+The scoped client auto-injects `workspaceId` on every query and create. Forgetting to scope is a multi-tenant data leak - use the helper.

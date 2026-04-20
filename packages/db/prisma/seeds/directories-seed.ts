@@ -1,5 +1,5 @@
 /**
- * Standalone seeder for the curated directory database. Idempotent — re-run
+ * Standalone seeder for the curated directory database. Idempotent - re-run
  * to refresh metadata after edits to `directories.ts`.
  *
  * Usage: pnpm --filter @launchmint/db seed:directories
